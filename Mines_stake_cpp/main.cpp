@@ -28,7 +28,23 @@ switch(choice){
  std::optional<char> quitch= 'c' ; //c for continue.
  while(quitch!=std::nullopt && *quitch!='q' && *quitch!='Q'){ //if money == 0 ;quitch = std::nullopt; 
    system("clear");
-   //remaining program.
+   float bet_amount;
+   int no_of_mines;
+   char change; // this will take yes or no from user as y or n to edit the inputs, the loop will go on till user enters n.
+   do{
+   std::cout<<"Amount in Wallet: "<<money;
+   std::cout<<std::endl<<"\nEnter the Bet Amount: ";
+   std::cin>>bet_amount;
+   std::cout<<std::endl<<"Enter No. of Mines: ";
+   std::cin>>no_of_mines;
+   std::cout<<std::endl<<"Edit the choices?(y/n): \n";
+   std::cin>>change;
+   if(bet_amount>money || no_of_mines<1 || no_of_mines>24)
+   change='y';
+   }while(change=='y' || change == 'Y');
+   system("clear");
+   money-=bet_amount;
+   std::cout<<std::endl<<"Remaining Money: "<<money;
    quitch=std::nullopt;
  }
 }
