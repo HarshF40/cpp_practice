@@ -1,5 +1,8 @@
 #include<iostream>
+#include"mine_f_decl.hpp"
+#include<optional>
 
+float money;
 
 int main(){
   
@@ -14,6 +17,18 @@ int main(){
   do{
   std::cout<<std::endl<<"Enter your Choice: ";
   std::cin>>choice;
-  }while(choice != 'p' && choice != 'r' && choice != 'q' && choice != 'P' && choice != 'R' && choice != 'Q');
-  
+  }while(choice != 'p' && choice != 'P' && choice != 'r' && choice != 'q' && choice != 'R' && choice != 'Q');
+switch(choice){
+  case 'r' :
+  case 'R' : return 0; // read rules will come afterwards. Will redirect to a function with rules and after that user will get choice to play or quit.
+  case 'q':
+  case 'Q': return 0; //Quits the Program.
+  default : money=getmoney();
+ }
+ std::optional<char> quitch= 'c' ; //c for continue.
+ while(quitch!=std::nullopt && *quitch!='q' && *quitch!='Q'){ //if money == 0 ;quitch = std::nullopt; 
+   system("clear");
+   //remaining program.
+   quitch=std::nullopt;
+ }
 }
