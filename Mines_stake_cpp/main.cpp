@@ -67,7 +67,7 @@ switch(choice){
    system("clear");
    //loop do while quit,mine,open all mines.
    //std::cout<<std::endl<<"Remaining Money: "<<money<<"\n";
-   int no_of_tiles=25 - no_of_mines;
+   int no_of_diamonds=25 - no_of_mines;
    bool mine_open_flag=0;
    bool exit_flag=0;
  do{
@@ -80,15 +80,19 @@ switch(choice){
      }
    }
    
-   int tiles_opened=0;
-  //correct the multiplier
-  // float total_win_amount = (no_of_mines+no_of_tiles)*bet_amount;
-  // float multiplier = (no_of_mines/bet_amount)*(tiles_opened);
+   int diamonds_opened=0;
+   // Adjust the factors as needed for desired scaling.
+   float mine_factor = 15.5f; // Factor to amplify the effect of mines.
+   float diamond_factor = 3.0f; // Factor to amplify the effect of diamonds.
+   
+   // float total_win_amount = (no_of_diamonds+no_of_mines)*(bet_amount/5);
+   float multiplier = 1;
+   multiplier = multiplier * (1 + (mine_factor * no_of_mines / 25.0f) + (diamond_factor * diamonds_opened / 25.0f));
    int winmoney=0;
    int row,column;
    
    std::cout<<"\nBet Amount: "<<bet_amount;
-  // std::cout<<"\nMultiplier: "<<multiplier;
+   std::cout<<"\nMultiplier: "<<multiplier;
    std::cout<<"\nMoney Won: "<<winmoney;
   // std::cout<<"\nTotal Win Amount: "<<total_win_amount;
    
@@ -99,7 +103,7 @@ switch(choice){
    std::cin>>row>>column;
    }while(row>4 && row<0 || column>4 && column <0 || display_grid[row*2][column*2]!='#');
    exit_flag=1;
- }while(no_of_tiles>0 && mine_open_flag==0 && exit_flag==0 );
+ }while(no_of_diamonds>0 && mine_open_flag==0 && exit_flag==0 );
  if(money==0){
    quitch=std::nullopt;
  }
