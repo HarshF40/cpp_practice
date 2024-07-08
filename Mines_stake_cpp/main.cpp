@@ -66,9 +66,41 @@ switch(choice){
    money-=bet_amount;
    system("clear");
    //loop do while quit,mine,open all mines.
-   
-   std::cout<<std::endl<<"Remaining Money: "<<money<<"\n";
+   //std::cout<<std::endl<<"Remaining Money: "<<money<<"\n";
+   int no_of_tiles=25 - no_of_mines;
+   bool mine_open_flag=0;
+   bool exit_flag=0;
+ do{
    gen_be_grid(backend_grid,gen_mine,no_of_mines); //will generate backend_grid grid with mines and diamond.
+   std::cout<<std::endl<<"Remaining Money: "<<money<<"\n";
+   for(int i=0;i<9;i++){
+     std::cout<<"\n";
+     for(int j=0;j<9;j++){
+       std::cout<<display_grid[i][j];
+     }
+   }
+   
+   int tiles_opened=0;
+  // change formula
+  // float total_win_amount = (1+(no_of_tiles/(25 - no_of_mines)))*(1+(no_of_mines/25))*bet_amount;
+  // float multiplier = (1+(tiles_opened/(25 - no_of_mines)))*(1+(no_of_mines/25));
+   int winmoney=0;
+   
+   std::cout<<"\nBet Amount: "<<bet_amount;
+  // std::cout<<"\nMultiplier: "<<multiplier;
+   std::cout<<"\nMoney Won: "<<winmoney;
+  // std::cout<<"\nTotal Win Amount: "<<total_win_amount;
+   
+   //get the r & c inputs from user to start opening mines.
+   exit_flag=1;
+ }while(no_of_tiles>0 && mine_open_flag==0 && exit_flag==0 );
+ if(money==0){
+   quitch=std::nullopt;
+ }
+ std::cout<<std::endl<<"Quit or Stay(q/any key): ";
+ char temp_quit_flag;
+ std::cin>>temp_quit_flag;
+ if(temp_quit_flag=='q' || temp_quit_flag=='Q') //else the loop will continue.
    quitch=std::nullopt;
  }
 }
