@@ -81,17 +81,23 @@ switch(choice){
    }
    
    int tiles_opened=0;
-  // change formula
-  // float total_win_amount = (1+(no_of_tiles/(25 - no_of_mines)))*(1+(no_of_mines/25))*bet_amount;
-  // float multiplier = (1+(tiles_opened/(25 - no_of_mines)))*(1+(no_of_mines/25));
+  //correct the multiplier
+  // float total_win_amount = (no_of_mines+no_of_tiles)*bet_amount;
+  // float multiplier = (no_of_mines/bet_amount)*(tiles_opened);
    int winmoney=0;
+   int row,column;
    
    std::cout<<"\nBet Amount: "<<bet_amount;
   // std::cout<<"\nMultiplier: "<<multiplier;
    std::cout<<"\nMoney Won: "<<winmoney;
   // std::cout<<"\nTotal Win Amount: "<<total_win_amount;
    
-   //get the r & c inputs from user to start opening mines.
+   //get the row & column inputs from user to start opening mines.
+   //do while will run until row and column are less than 4 and greater than 0 and if the position is already opened.
+   do{
+   std::cout<<std::endl<<"Enter The Position to open the tile: ";
+   std::cin>>row>>column;
+   }while(row>4 && row<0 || column>4 && column <0 || display_grid[row*2][column*2]!='#');
    exit_flag=1;
  }while(no_of_tiles>0 && mine_open_flag==0 && exit_flag==0 );
  if(money==0){
