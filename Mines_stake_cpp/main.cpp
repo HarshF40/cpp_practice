@@ -70,7 +70,7 @@ switch(choice){
    int no_of_diamonds=25 - no_of_mines;
    bool mine_open_flag=0;
    bool exit_flag=0;
- do{
+ while(mine_open_flag==0 && exit_flag==0 ){
    gen_be_grid(backend_grid,gen_mine,no_of_mines); //will generate backend_grid grid with mines and diamond.
    std::cout<<std::endl<<"Remaining Money: "<<money<<"\n";
    for(int i=0;i<9;i++){
@@ -95,15 +95,36 @@ switch(choice){
    std::cout<<"\nMultiplier: "<<multiplier;
    std::cout<<"\nMoney Won: "<<winmoney;
   // std::cout<<"\nTotal Win Amount: "<<total_win_amount;
-   
+   //
+   if(diamonds_opened==no_of_diamonds){
+    std::cout<<"\nOpened All The diamonds!";
+     std::cout<<"\nMoney Won: "<<winmoney;
+    money+=winmoney;
+     std::cout<<"\nTotal Money: "<<money;
+     for(int i=0;i<5;i++){
+       for(int j=0;j<5;j++){
+         display_grid[i*2][j*2]=backend_grid[i][j];
+       }
+     }
+     //display the grid with diamonds and mines.
+     for(int i=0;i<9;i++){
+       std::cout<<"\n";
+       for(int j=0;j<9;j++){
+         std::cout<<display_grid[i][j];
+       }
+     }
+     exit_flag=1;
+     break;
+   }
    //get the row & column inputs from user to start opening mines.
    //do while will run until row and column are less than 4 and greater than 0 and if the position is already opened.
    do{
    std::cout<<std::endl<<"Enter The Position to open the tile: ";
    std::cin>>row>>column;
    }while(row>4 && row<0 || column>4 && column <0 || display_grid[row*2][column*2]!='#');
+   //just to close loop
    exit_flag=1;
- }while(no_of_diamonds>0 && mine_open_flag==0 && exit_flag==0 );
+ }
  if(money==0){
    quitch=std::nullopt;
  }
