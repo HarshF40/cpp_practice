@@ -25,13 +25,17 @@ void gen_mine(char (*arr_ptr2)[5],int num_of_mines1){ // generates mine using me
   
 int main(){
   
+  rule_loop:
+  char rulevar;
+  
   char choice; // choice whether to start,read rules or quit;
   
   system("clear"); //to clear the all other things from screen.
   std::cout<<std::endl<<"M!NES"<<std::endl<<std::endl<<std::endl;
-  std::cout<<std::endl<<" Play(p)"<<std::endl<<" Rules(r)"<<std::endl<<" Quit(q)"<<std::endl;
+  std::cout<<std::endl<<" Play(p)"<<std::endl<<" Read(r)"<<std::endl<<" Quit(q)"<<std::endl;
   
   //do while loop till user enters a valid  input.
+  
   
   do{
   std::cout<<std::endl<<"Enter your Choice: ";
@@ -39,7 +43,14 @@ int main(){
   }while(choice != 'p' && choice != 'P' && choice != 'r' && choice != 'q' && choice != 'R' && choice != 'Q');
 switch(choice){
   case 'r' :
-  case 'R' : return 0; // read rules will come afterwards. Will redirect to a function with rules and after that user will get choice to play or quit.
+  case 'R' : read_rules(); //some info about the Game.
+             std::cout<<"Quit or Continue(q/any key): ";
+             std::cin>>rulevar;
+             if(rulevar=='q' || rulevar=='Q'){
+               return 0;
+             } else {
+               goto rule_loop;
+             }
   case 'q':
   case 'Q': return 0; //Quits the Program.
   default : money=getmoney();

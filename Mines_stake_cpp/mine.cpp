@@ -20,3 +20,20 @@ void gen_be_grid(char (*arr_ptr)[5],void (*funcptr)(char (*)[5],int),int num_min
   }
   funcptr(arr_ptr,num_mines);
 }
+
+void read_rules(){
+  system("clear");
+  std::cout<<std::endl<<"About: "<<"\n\nThis Game is C++ version of Mines Game from Stake.Player has to bet money and select the tiles with Diamonds,if player opens a mine the match ends and the player loses the money.";
+  std::cout<<std::endl<<"\n\n# -> tile\n0 -> Diamond\n* -> mine";
+  std::cout<<std::endl<<"\nPosition Map of the Grid: \n";
+  
+  for(int i=0;i<5;i++){
+    std::cout<<"\n";
+    for(int j=0;j<5;j++){
+      std::cout<<i<<" "<<j<<"   ";
+    }
+  }
+  
+  std::cout<<"\n\nWARNING: \n";
+  std::cout<<"\nEnter The Row & Column Position of the tile individually!!!\n\n";
+}
