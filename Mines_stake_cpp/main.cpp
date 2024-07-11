@@ -67,12 +67,25 @@ switch(choice){
    system("clear");
    //loop do while quit,mine,open all mines.
    //std::cout<<std::endl<<"Remaining Money: "<<money<<"\n";
+   int diamonds_opened=0;
+   // Adjust the factors as needed for desired scaling.
+   float mine_factor = 15.5f; // Factor to amplify the effect of mines.
+   float diamond_factor = 3.0f; // Factor to amplify the effect of diamonds.
    int no_of_diamonds=25 - no_of_mines;
    bool mine_open_flag=0;
    bool exit_flag=0;
+   float multiplier = 1;
+   
+   int winmoney=0;
+   int text_continue_or_quit=0;
+   
  while(mine_open_flag==0 && exit_flag==0 ){
    gen_be_grid(backend_grid,gen_mine,no_of_mines); //will generate backend_grid grid with mines and diamond.
+   multiplier = multiplier * (1 + (mine_factor * no_of_mines / 25.0f) +
+   (diamond_factor * diamonds_opened / 25.0f));
+   system("clear");
    std::cout<<std::endl<<"Remaining Money: "<<money<<"\n";
+   
    for(int i=0;i<9;i++){
      std::cout<<"\n";
      for(int j=0;j<9;j++){
@@ -80,26 +93,20 @@ switch(choice){
      }
    }
    
-   int diamonds_opened=0;
-   // Adjust the factors as needed for desired scaling.
-   float mine_factor = 15.5f; // Factor to amplify the effect of mines.
-   float diamond_factor = 3.0f; // Factor to amplify the effect of diamonds.
+   
    
    // float total_win_amount = (no_of_diamonds+no_of_mines)*(bet_amount/5);
-   float multiplier = 1;
-   multiplier = multiplier * (1 + (mine_factor * no_of_mines / 25.0f) + (diamond_factor * diamonds_opened / 25.0f));
-   int winmoney=0;
+   
    int row,column;
    
-   std::cout<<"\nBet Amount: "<<bet_amount;
-   std::cout<<"\nMultiplier: "<<multiplier;
-   std::cout<<"\nMoney Won: "<<winmoney;
-  // std::cout<<"\nTotal Win Amount: "<<total_win_amount;
+   
+   
    //
    if(diamonds_opened==no_of_diamonds){
-    std::cout<<"\nOpened All The diamonds!";
+     system("clear");
+     money+=winmoney;
+     std::cout<<"\nOpened All The diamonds!";
      std::cout<<"\nMoney Won: "<<winmoney;
-    money+=winmoney;
      std::cout<<"\nTotal Money: "<<money;
      for(int i=0;i<5;i++){
        for(int j=0;j<5;j++){
@@ -113,17 +120,62 @@ switch(choice){
          std::cout<<display_grid[i][j];
        }
      }
-     exit_flag=1;
-     break;
+    // exit_flag=1;
+     break; // will come out of do-while. If only exit flag=1 is kept.. the inside do - while will execute anyways.
    }
    //get the row & column inputs from user to start opening mines.
    //do while will run until row and column are less than 4 and greater than 0 and if the position is already opened.
+   
+   
+   
+     std::cout<<"\nBet Amount: "<<bet_amount;
+   std::cout<<"\nMultiplier: "<<multiplier;
+   std::cout<<"\nMoney Won: "<<winmoney;
+  // std::cout<<"\nTotal Win Amount: "<<total_win_amount;
+  if(text_continue_or_quit){
+     char con_q;
+     std::cout<<"\nContinue Or Stop The Round?(c/q)";
+     std::cin>>con_q;
+     if(con_q=='q'){
+       //exit_flag=1;
+       money+=winmoney;
+       break;
+     }
+   }
+   
    do{
+     
    std::cout<<std::endl<<"Enter The Position to open the tile: ";
    std::cin>>row>>column;
    }while(row>4 && row<0 || column>4 && column <0 || display_grid[row*2][column*2]!='#');
+   if(backend_grid[row][column]=='*'){
+     system("clear");
+     std::cout<<"You have Opened a mine!";
+     for(int i=0;i<5;i++){
+       for(int j=0;j<5;j++){
+         display_grid[i*2][j*2]=backend_grid[i][j];
+       }
+     }
+     //display the grid with diamonds and mines.
+     for(int i=0;i<9;i++){
+       std::cout<<"\n";
+       for(int j=0;j<9;j++){
+         std::cout<<display_grid[i][j];
+       }
+     }
+     std::cout<<"\nMoney lost: "<<bet_amount;
+    //will get back to it to see if it breaks of off loop or not.
+     mine_open_flag=1;
+   } else if(backend_grid[row][column]=='0'){
+     display_grid[row*2][column*2]=backend_grid[row][column];
+     winmoney=bet_amount*multiplier;
+    // money+=winmoney;
+     diamonds_opened++;
+     text_continue_or_quit=1;
+   }
+   
    //just to close loop
-   exit_flag=1;
+   //exit_flag=1;
  }
  if(money==0){
    quitch=std::nullopt;
