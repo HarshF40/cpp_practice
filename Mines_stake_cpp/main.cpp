@@ -85,8 +85,8 @@ switch(choice){
    
    int diamonds_opened=0;
           // Adjust the factors as needed for desired scaling.
-   float mine_factor = 5.0f; // Factor to amplify the effect of mines.
-   float diamond_factor = 3.0f; // Factor to amplify the effect of diamonds.
+   float mine_factor = 0.5f; // Factor to amplify the effect of mines.
+   float diamond_factor = 0.1f; // Factor to amplify the effect of diamonds.
    int no_of_diamonds=25 - no_of_mines;
    bool mine_open_flag=0; // Flag to indicate if player opens a mine.
    bool exit_flag=0; // Flag to indicate if player wants to exit.
