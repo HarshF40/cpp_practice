@@ -50,7 +50,7 @@ std::ostream& operator<<(std::ostream& out,Pet pet){ // Modifying(Teaching) outp
 }
 
 int main(){
-  std::cout<<"Enter Your Pet: ";
+  std::cout<<"Enter Your Pet(cat,dog,komodo): ";
   Pet pet{};
   std::cin>>pet;
   if(std::cin){
