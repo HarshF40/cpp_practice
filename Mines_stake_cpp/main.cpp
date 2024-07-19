@@ -93,9 +93,10 @@ switch(choice){
    float multiplier = 1;
    int winmoney=0;
    int text_continue_or_quit=0; // Will be equal to 1 after 1st round so that the text appears.
+   gen_be_grid(backend_grid,gen_mine,no_of_mines); // Will generate backend_grid with mines and diamond.
    
  while(mine_open_flag==0 && exit_flag==0 ){ // Loop will continue until the user opens a mine or want to quit.
-   gen_be_grid(backend_grid,gen_mine,no_of_mines); // Will generate backend_grid with mines and diamond.
+   
    multiplier = multiplier * (1 + (mine_factor * no_of_mines / 25.0f) +
    (diamond_factor * diamonds_opened / 25.0f)); // Formula For multiplier used in Game.
    
