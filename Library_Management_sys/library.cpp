@@ -1,7 +1,48 @@
+//code in progress!!!!
+
+
 #include<iostream>
 #include<string>
 #include<string_view>
 #include<limits>
+
+class USER{
+
+  private:
+
+  std::string Name{};
+  std::string ID{};
+
+  struct Book_Borrowed {
+    std::string Book_Name{};
+    std::string Date{};
+    std::string return_date{};
+  };
+
+  public:
+
+  USER() = default;
+
+  USER(std::string_view name,std::string_view id) : Name{name} , ID{id} {}
+
+  void getUserdata(){
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+      std::cout<<"\nEnter Name of the User: ";
+      getline(std::cin,Name);
+      //will be improved afterwards.
+      std::cout<<"\nEnter Unique ID: ";
+      getline(std::cin,ID);
+  }
+
+  std::string_view display_USER_id(){
+    return ID;
+  }
+
+  std::string_view display_USER_name(){
+    return Name;
+  }
+
+};
 
 class Book{
   private:
@@ -45,6 +86,7 @@ class Book{
     int getNo_ofCopies() const {
       return no_of_copies;
     }
+
 };
 
 class Library{
@@ -52,11 +94,14 @@ class Library{
   private:
     int no_of_books{0};
     Book* books;
+    int no_of_users;
+    USER* users;
 
   public:
 
-    Library(int num_of_books=0,Book* b=nullptr) : no_of_books{num_of_books},books{b}{
+    Library(int num_of_books=0,Book* b=nullptr,int num_of_users=0,USER* u=nullptr) : no_of_books{num_of_books},books{b}{
       books = new Book[no_of_books];
+      users = new USER[no_of_users];
     }
 
     void add_books(int new_books=0){
@@ -71,12 +116,29 @@ class Library{
    void listAll_Books_inLib() const {
      std::cout<<"\nAvailable Books\nTitle: \n";
      for(int i=0;i<no_of_books;){
-       if(books[i].getNo_ofCopies > 0){
+       //borrowed copies will be chceked
+       if(books[i].getNo_ofCopies()> 0){
        std::cout<<i<<". "<<books[i].getTitle()<<'\n';
        i++;
        }
      }
    } 
+
+   void add_users(int new_users=0){
+     int range = no_of_users+new_users;
+     for(int i=no_of_users;i<range;i++){
+       users[i].getUserdata();
+       no_of_users++;
+     }
+   }
+
+   void listAll_Users_inLib() const {
+     std::cout<<"\nUsers: \n";
+     for(int i=0;i<no_of_users;i++){
+       std::cout<<users[i].display_USER_id()<<' '<<users[i].display_USER_name()<<'\n'; 
+     }
+   }
+
 };
 
 int main(){
@@ -92,8 +154,16 @@ int main(){
   //B.display_details();
   L.listAll_Books_inLib();
 
-  std::cout<<"\nCalling add books(3)\n";
-  L.add_books(3);
-  L.listAll_Books_inLib();
+//  std::cout<<"\nCalling add books(3)\n";
+//  L.add_books(3);
+ // L.listAll_Books_inLib();
+
+  std::cout<<"\nAdd user\n\n";
+
+  std::cout<<"\nEnter No. of users: ";
+  int unum;
+  std::cin>>unum;
+  L.add_users(unum);
+  L.listAll_Users_inLib();
   return 0;
 }
