@@ -45,15 +45,12 @@ class Car{
     Car(Color C,std::string_view eng,int hp) :   color{C},m_engine{hp,eng} {}
 
     void PrintDetails() const {
-      std::cout<<"\nColor : "<<color;
+      std::cout<<"\nColor : "<<*this;
       m_engine.printEngine();
     }
 
-};
-
-
-std::ostream& operator<<(std::ostream& ou,Car::Color C){
-switch(C) {
+friend std::ostream& operator<<(std::ostream& ou,const Car& C){
+switch(C.color) {
   case Car::Color::red : return ou<<"red";
   case Car::Color::blue : return ou<<"blue";
   case Car::Color::green : return ou<<"green";
@@ -61,6 +58,8 @@ switch(C) {
  }
 }
 
+
+};
 
 int main(){
   const Car C{Car::Color::blue,"V16",1600};
