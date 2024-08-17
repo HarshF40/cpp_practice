@@ -37,17 +37,17 @@ class Triad{
     V data3;
 
   public:
-    Triad(T a,U b,V c) : data1{a},data2{b},data3{c} {}
+    Triad(const T& a,const U& b,const V& c) : data1{a},data2{b},data3{c} {}
 
-    T first() const {
+    const T& first() const {
       return data1;
     }
 
-    U second() const {
+    const U& second() const {
       return data2;
     }
 
-    V third() const {
+    const V& third() const {
       return data3;
     }
 
