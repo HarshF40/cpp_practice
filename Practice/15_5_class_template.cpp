@@ -7,6 +7,7 @@ The following program should compile and run:
 
 int main()
 {
+<<<<<<< HEAD
 	Triad<int, int, int> t1{ 1, 2, 3 };
 	t1.print();
 	std::cout << '\n';
@@ -18,6 +19,19 @@ int main()
 	std::cout << '\n';
 
 	return 0;
+=======
+  Triad<int, int, int> t1{ 1, 2, 3 };
+  t1.print();
+  std::cout << '\n';
+  std::cout << t1.first() << '\n';
+
+  using namespace std::literals::string_literals;
+  const Triad t2{ 1, 2.3, "Hello"s };
+  t2.print();
+  std::cout << '\n';
+
+  return 0;
+>>>>>>> 465a72f26c26ff480dd222c0cb123b0e39415dea
 }
 and produce the output:
 
@@ -63,6 +77,7 @@ template <typename T,typename U,typename V>
 
 int main()
 {
+<<<<<<< HEAD
 	Triad<int, int, int> t1{ 1, 2, 3 };
 	t1.print();
 	std::cout << '\n';
@@ -76,3 +91,17 @@ int main()
 	return 0;
 }
 
+=======
+  Triad<int, int, int> t1{ 1, 2, 3 };
+  t1.print();
+  std::cout << '\n';
+  std::cout << t1.first() << '\n';
+
+  using namespace std::literals::string_literals;
+  const Triad t2{ 1, 2.3, "Hello"s };
+  t2.print();
+  std::cout << '\n';
+
+  return 0;
+}
+>>>>>>> 465a72f26c26ff480dd222c0cb123b0e39415dea
