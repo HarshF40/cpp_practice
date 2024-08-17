@@ -2,6 +2,7 @@
 #include<string>
 #include<string_view>
 #include<limits>
+#include<iomanip>
 #include"Lib.hpp"
 
 Books::Books() = default;
@@ -97,27 +98,17 @@ Books::Books() = default;
       }
    
 //rewrite
-void Books::list_books(int books_in_lib) const {
-  //std::cout<<"hi";
-  book* curr = start;
-  for(int i=0;i<books_in_lib;i++){
-    if(curr == nullptr)
-      break;
-    else {
-    std::cout<<curr->Name<<'\n';
-    curr = curr->next;
-  }
-}
-}
-
-/*void Books::Books_del(){
-  book* current = start;
-  while(current!=nullptr){
-    book* nextnode = current->next;
-    delete current;
-    current = nextnode;
-  }
-  start = nullptr;
-}*/
-
+void Books::list_books() const {
+  book* curr;
+  if(start == nullptr){
+    std::cout<<"No books in Library!";
+  } else {
+    int i=1;
+    std::cout<<std::setw(5)<<"Sr. No."<<std::setw(10)<<"Book";
+    for(curr = start;curr!=nullptr;curr=curr->next){
+      std::cout<<std::setw(5)<<i+1<<std::setw(10)<<curr->Name<<'\n';
+      i++;
+     }
+   }
+ }
 

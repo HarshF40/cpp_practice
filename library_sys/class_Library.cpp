@@ -31,7 +31,7 @@ Library::Library() = default;
 
     switch(choice){
 
-      case 'l' : B.list_books(no_of_books_in_Lib);
+      case 'l' : B.list_books();
                   break;
 
       case 'a' : int num_of_books_add;
@@ -44,7 +44,7 @@ Library::Library() = default;
       case 'q' : //B.Books_del();
                  return;
 
-      default: std::cout<<"\nInvalid Input!";
+      default: std::cout<<"\nInvalid Input!\n\n";
 
     }
 

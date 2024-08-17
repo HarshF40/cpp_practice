@@ -8,9 +8,9 @@ class Books{
     struct book{                    
       std::string Name;
       std::string Author;
-      int no_of_pages;
-      int no_of_copies;       
-      long int ISBN;
+      long unsigned int no_of_pages;
+      long unsigned int no_of_copies;       
+      long unsigned int ISBN;
       book *prev,*next;
     }*start = new book;//add *last if needed
              //
@@ -23,7 +23,7 @@ class Books{
 
     void add_Books(int num_of_book);
 
-    void list_books(int books_in_Lib) const ;
+    void list_books() const ;
 
    // void Books_del();
 };
