@@ -12,11 +12,8 @@ class Books{
       long unsigned int no_of_copies;       
       long unsigned int ISBN;
       book *prev,*next;
-    }*start = new book;//add *last if needed
-             //
-         //  start = new book;
-          //  start = NULL;
-        //  start->next = NULL;
+    }*start;
+
   public:
 
     Books();
@@ -25,7 +22,6 @@ class Books{
 
     void list_books() const ;
 
-   // void Books_del();
 };
 
 
@@ -35,7 +31,6 @@ class Library{
 
     int no_of_books_in_Lib;
     Books B;
-    //start = new book;
 
   public:
 

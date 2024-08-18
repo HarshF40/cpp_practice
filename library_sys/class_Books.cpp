@@ -5,13 +5,17 @@
 #include<iomanip>
 #include"Lib.hpp"
 
-Books::Books() = default;
+Books::Books(){
+  start = nullptr;
+}
 
  void Books::add_Books(int num_of_books){
 
    system("clear");
 
-      if(start->next == nullptr){
+      if(start == nullptr){
+
+        start = new book;
 
         book *curr,*last;
 
@@ -70,7 +74,9 @@ Books::Books() = default;
 
           book *t,*curr;
 
-         for(t=start;t!=nullptr;t=t->next)
+         for(book* temp=start;temp!=nullptr;temp=temp->next){
+           t=temp;
+         }
 
            for(int i=0;i<num_of_books;i++){
 
@@ -94,10 +100,10 @@ Books::Books() = default;
         std::cin>>curr->ISBN;
         std::cout<<"\n";
 
+        t->next = curr;
         curr->next = nullptr;
         curr->prev = t;
-        t->next = curr;
-        t = curr;
+        t=curr;
 
            }
         }     
@@ -107,12 +113,13 @@ void Books::list_books() const {
   system("clear");
   book* curr;
   if(start == nullptr){
-    std::cout<<"No books in Library!";
+    std::cout<<"No books in Library!"<<std::endl;
   } else {
     int i=1;
-    std::cout<<std::left<<"Sr. No."<<std::setw(20)<<"Book\n";
+    std::cout<<std::setw(20)<<std::left<<"Sr. No."<<std::setw(5)<<std::setw(20)<<std::left<<"Book Name"<<"\n";
+    std::cout<<"-----------------------------"<<'\n';
     for(curr = start;curr!=nullptr;curr=curr->next){
-      std::cout<<i<<std::setw(29)<<curr->Name<<'\n';
+      std::cout<<std::setw(20)<<std::left<<i<<std::setw(5)<<std::setw(20)<<std::left<<curr->Name<<"\n";
       i++;
      }
    }
