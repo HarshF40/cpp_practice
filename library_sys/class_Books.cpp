@@ -9,51 +9,55 @@ Books::Books() = default;
 
  void Books::add_Books(int num_of_books){
 
-      //if the linked list is empty:
+   system("clear");
+
       if(start->next == nullptr){
 
         book *curr,*last;
-     //   start = new book;
 
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
-        std::cout<<"\nEnter The Name of the book: ";
+        std::cout<<"Enter The Name of the book 1: ";
         std::getline(std::cin,start->Name);
 
-        std::cout<<"\nEnter Author's name: ";
+        std::cout<<"Enter Author's name: ";
         std::getline(std::cin,start->Author);
 
-        std::cout<<"\nEnter No. of pages: ";
+        std::cout<<"Enter No. of pages: ";
         std::cin>>start->no_of_pages;
 
-        std::cout<<"\nEnter No. of copies: ";
+        std::cout<<"Enter No. of copies: ";
         std::cin>>start->no_of_copies;
 
-        std::cout<<"\nEnter ISBN: ";
+        std::cout<<"Enter ISBN: ";
         std::cin>>start->ISBN;
+        std::cout<<"\n";
 
         start->prev = nullptr;
         start->next = nullptr;
         last = start;
 
         for(int i=1;i<num_of_books;i++){
+
           curr = new book;
+
  std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
-        std::cout<<"\nEnter The Name of the book: ";
+        std::cout<<"Enter The Name of the book "<<i+1<<": ";
         std::getline(std::cin,curr->Name);
 
-        std::cout<<"\nEnter Author's name: ";
+        std::cout<<"Enter Author's name: ";
         std::getline(std::cin,curr->Author);
 
-        std::cout<<"\nEnter No. of pages: ";
+        std::cout<<"Enter No. of pages: ";
         std::cin>>curr->no_of_pages;
 
-        std::cout<<"\nEnter No. of copies: ";
+        std::cout<<"Enter No. of copies: ";
         std::cin>>curr->no_of_copies;
 
-        std::cout<<"\nEnter ISBN: ";
+        std::cout<<"Enter ISBN: ";
         std::cin>>curr->ISBN;
+        std::cout<<"\n";
 
         last->next = curr;
         curr->prev = last;
@@ -61,6 +65,7 @@ Books::Books() = default;
         last = curr;
 
         }
+
       } else {
 
           book *t,*curr;
@@ -73,20 +78,21 @@ Books::Books() = default;
 
              std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
-        std::cout<<"\nEnter The Name of the book: ";
+        std::cout<<"Enter The Name of the book "<<i+1<<": ";
         std::getline(std::cin,curr->Name);
 
-        std::cout<<"\nEnter Author's name: ";
+        std::cout<<"Enter Author's name: ";
         std::getline(std::cin,curr->Author);
 
-        std::cout<<"\nEnter No. of pages: ";
+        std::cout<<"Enter No. of pages: ";
         std::cin>>curr->no_of_pages;
 
-        std::cout<<"\nEnter No. of copies: ";
+        std::cout<<"Enter No. of copies: ";
         std::cin>>curr->no_of_copies;
 
-        std::cout<<"\nEnter ISBN: ";
+        std::cout<<"Enter ISBN: ";
         std::cin>>curr->ISBN;
+        std::cout<<"\n";
 
         curr->next = nullptr;
         curr->prev = t;
@@ -97,18 +103,19 @@ Books::Books() = default;
         }     
       }
    
-//rewrite
 void Books::list_books() const {
+  system("clear");
   book* curr;
   if(start == nullptr){
     std::cout<<"No books in Library!";
   } else {
     int i=1;
-    std::cout<<std::setw(5)<<"Sr. No."<<std::setw(10)<<"Book";
+    std::cout<<std::left<<"Sr. No."<<std::setw(20)<<"Book\n";
     for(curr = start;curr!=nullptr;curr=curr->next){
-      std::cout<<std::setw(5)<<i+1<<std::setw(10)<<curr->Name<<'\n';
+      std::cout<<i<<std::setw(29)<<curr->Name<<'\n';
       i++;
      }
    }
+  std::cout<<std::endl;
  }
 

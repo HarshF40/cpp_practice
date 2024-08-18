@@ -1,15 +1,7 @@
 #include<iostream>
 #include<string>
+#include<iomanip>
 #include"Lib.hpp"
-
-/*class Library{
-
-  private:
-
-    int no_of_books_in_Lib{0};
-    Books B;
-
-  public: */
 
 Library::Library() = default;
 
@@ -17,15 +9,16 @@ Library::Library() = default;
 
       bool on = true;
 
-      std::cout<<"             \\\\\\\\\\\\\\\\_YuLib_////////";
-  std::cout<<"\n\n\n\n\n";
+      std::cout<<"\n\n";
+      std::cout<<std::setw(30)<<"\\\\\\\\\\\\\\\\_YuLib_////////";
+  std::cout<<"\n\n\n";
 
   while(on){
 
     char choice;
 
     std::cout<<"List all books(l)\nAdd books(a)\nQuit(q)";
-    std::cout<<"\n\n\n~ ";
+    std::cout<<"\n\n~ ";
     std::cin>>choice;
 
 
@@ -35,23 +28,19 @@ Library::Library() = default;
                   break;
 
       case 'a' : int num_of_books_add;
+                 system("clear");
                   std::cout<<"\nEnter No. of books to add: ";
                   std::cin>>num_of_books_add;
                   B.add_Books(num_of_books_add);
                   no_of_books_in_Lib+=num_of_books_add;
                  break;
 
-      case 'q' : //B.Books_del();
-                 return;
+      case 'q' : return;
 
       default: std::cout<<"\nInvalid Input!\n\n";
 
     }
-
-
-  }
-
-
-    }
+  }  
+}
 
 
