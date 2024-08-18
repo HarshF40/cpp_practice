@@ -22,6 +22,8 @@ class Books{
 
     void list_books() const ;
 
+    void delete_book(int num_books,const Books& Btemp);
+
 };
 
 
@@ -40,5 +42,6 @@ class Library{
 
 };
 
+const std::string to_lower_string(std::string_view sv);
 
 #endif

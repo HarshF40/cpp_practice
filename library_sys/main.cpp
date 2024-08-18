@@ -1,11 +1,13 @@
 #include<iostream>
 #include"Lib.hpp"
 
+
 int main(){
+
+  Library L;
 
   system("clear");
 
-  Library L;
   L.StartLib();
 
 return 0;
