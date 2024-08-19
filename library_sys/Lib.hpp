@@ -18,11 +18,11 @@ class Books{
 
     Books();
 
-    void add_Books(int num_of_book);
+    int add_Books(const Books& Btemp);
 
     void list_books() const ;
 
-    void delete_book(int num_books,const Books& Btemp);
+    int delete_book(const Books& Btemp);
 
 };
 

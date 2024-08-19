@@ -31,9 +31,7 @@ Library::Library() = default;
       case 'a' : {
                   int num_of_books_add;
                   system("clear");
-                  std::cout<<"\nEnter No. of books to add: ";
-                  std::cin>>num_of_books_add;
-                  B.add_Books(num_of_books_add);
+                  num_of_books_add = B.add_Books(B);
                   no_of_books_in_Lib+=num_of_books_add;
                   break;
                  }
@@ -41,10 +39,7 @@ Library::Library() = default;
       case 'd' : {
                  system("clear");
                  int d_books;
-                 std::cout<<"\nEnter The Number of books to delete: ";
-                 std::cin>>d_books;
-                 B.delete_book(d_books,B);
-                 std::cout<<std::endl;
+                 d_books = B.delete_book(B);
                  no_of_books_in_Lib-=d_books;
                  break;
                  }
