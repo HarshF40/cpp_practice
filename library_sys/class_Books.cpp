@@ -51,9 +51,10 @@ Books::Books(){
         std::cout<<"\nAdd book(enter) / Quit(q): ";
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         std::getline(std::cin,str);
-        std::cout<<std::endl;
-        if(str == "q")
+        if(str == "q"){
+          std::cout<<std::endl;
           return book_counter; 
+        }
 
         int i=1;
 
@@ -93,8 +94,10 @@ Books::Books(){
         i++;
         book_counter++;
 
-        if(str == "q")
+        if(str == "q"){
+          std::cout<<std::endl;
           return book_counter;
+        }
 
         }//
 
@@ -147,12 +150,15 @@ Books::Books(){
         i++;
         book_counter++;
 
-        if(str == "q")
+        if(str == "q"){
+          std::cout<<std::endl;
           return book_counter;
+        }
         
            }while(str!="q");
         }
       //just beacuse of error : )
+      std::cout<<std::endl;
       return book_counter;
       }
    
@@ -176,25 +182,29 @@ void Books::list_books() const {
 int Books::delete_book(const Books& Btemp){
 
   int deleted_books;
-  std::string book_name;
+  std::string book_name{};
   std::string str;
 
   do{
-
+    
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
     Btemp.list_books();
 
     std::cout<<"\nEnter The Name of the Book: ";
-    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::getline(std::cin,book_name);
 
-  book* temp=start;
+    book* temp=start;
 
   for(;temp!=nullptr;temp=temp->next){
+
     if(to_lower_string(book_name)==to_lower_string(temp->Name)){
 
-      if(temp->prev==nullptr){
+    if(temp->next == nullptr && temp->prev== nullptr){
+      std::cout<<"\n"<<temp->Name<<" has been deleted!\n";
+        delete temp;
+        start = nullptr;
+      } else if(temp->prev==nullptr){
         (temp->next)->prev = nullptr;
         start = temp->next;
         std::cout<<"\n"<<temp->Name<<" has been deleted!\n";
@@ -211,12 +221,17 @@ int Books::delete_book(const Books& Btemp){
      }
     }
   }
+
   std::cout<<"Delete Book(enter)/Quit(q) : ";
   std::getline(std::cin,str);
   deleted_books++;
-  if(str == "q")
+
+  if(str == "q"){
+    std::cout<<std::endl;
     return deleted_books;
+  }
  }while(str!="q");
+  std::cout<<std::endl;
   return deleted_books;
 }
 
