@@ -49,8 +49,9 @@ Books::Books(){
        // for(int i=1;i<num_of_books;i++){
        //
         std::cout<<"\nAdd book(enter) / Quit(q): ";
-        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         std::getline(std::cin,str);
+        std::cout<<std::endl;
         if(str == "q")
           return book_counter; 
 
@@ -60,8 +61,7 @@ Books::Books(){
 
 
           curr = new book;
-
- std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+          //std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
         std::cout<<"Enter The Name of the book "<<i+1<<": ";
         std::getline(std::cin,curr->Name);
@@ -87,7 +87,7 @@ Books::Books(){
         Btemp.list_books();
 
         std::cout<<"\nAdd book(enter) / Quit(q): ";
-        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         std::getline(std::cin,str);
 
         i++;
@@ -115,7 +115,7 @@ Books::Books(){
 
              curr = new book;
 
-             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+            // std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
         std::cout<<"Enter The Name of the book "<<i+1<<": ";
         std::getline(std::cin,curr->Name);
@@ -141,7 +141,7 @@ Books::Books(){
         Btemp.list_books();
 
         std::cout<<"\nAdd book(enter) / Quit(q): ";
-       // std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         std::getline(std::cin,str);
 
         i++;
@@ -181,10 +181,12 @@ int Books::delete_book(const Books& Btemp){
 
   do{
 
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+
     Btemp.list_books();
 
     std::cout<<"\nEnter The Name of the Book: ";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::getline(std::cin,book_name);
 
   book* temp=start;
