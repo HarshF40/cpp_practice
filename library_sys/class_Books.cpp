@@ -203,10 +203,11 @@ int Books::delete_book(const Books& Btemp){
       num_book++;
     }
 
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
     Btemp.list_books();
     std::cout<<"\nEnter The Name of the Book: ";
+    std::cin.ignore();
     std::getline(std::cin,book_name);
 
     book* temp=start;
