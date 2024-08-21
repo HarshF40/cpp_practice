@@ -21,11 +21,10 @@ Books::Books(){
         start = new book;
 
         book *curr,*last;
-
-       //std::cin.ignore();
+        
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
         std::cout<<"\nEnter The Name of the book 1: ";
-        std::cin.ignore();
         std::getline(std::cin,start->Name);
 
         std::cout<<"Enter Author's name: ";
@@ -33,15 +32,12 @@ Books::Books(){
 
         std::cout<<"Enter No. of pages: ";
         std::cin>>start->no_of_pages;
-        std::cin.ignore();
 
         std::cout<<"Enter No. of copies: ";
         std::cin>>start->no_of_copies;
-        std::cin.ignore();
 
         std::cout<<"Enter ISBN: ";
         std::cin>>start->ISBN;
-        std::cin.ignore();
         std::cout<<"\n";
 
         start->prev = nullptr;
@@ -49,6 +45,7 @@ Books::Books(){
         last = start;
 
         Btemp.list_books();
+        std::cin.ignore();
 
         std::cout<<"\nAdd book(enter) / Quit(q): ";
         std::getline(std::cin,str);
@@ -66,10 +63,9 @@ Books::Books(){
 
           curr = new book;
 
-          //std::cin.ignore();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
         std::cout<<"\nEnter The Name of the book "<<i+1<<": ";
-        std::cin.ignore();
         std::getline(std::cin,curr->Name);
 
         std::cout<<"Enter Author's name: ";
@@ -77,15 +73,12 @@ Books::Books(){
 
         std::cout<<"Enter No. of pages: ";
         std::cin>>curr->no_of_pages;
-        std::cin.ignore();
 
         std::cout<<"Enter No. of copies: ";
         std::cin>>curr->no_of_copies;
-        std::cin.ignore();
 
         std::cout<<"Enter ISBN: ";
         std::cin>>curr->ISBN;
-        std::cin.ignore();
         std::cout<<"\n";
 
         last->next = curr;
@@ -94,6 +87,7 @@ Books::Books(){
         last = curr;
 
         Btemp.list_books();
+        std::cin.ignore();
 
         std::cout<<"\nAdd book(enter) / Quit(q): ";
         std::getline(std::cin,str);
@@ -125,10 +119,9 @@ Books::Books(){
 
              curr = new book;
 
-             //std::cin.ignore();
+             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
         std::cout<<"\nEnter The Name of the book "<<i+1<<": ";
-        std::cin.ignore();
         std::getline(std::cin,curr->Name);
 
         std::cout<<"Enter Author's name: ";
@@ -136,15 +129,12 @@ Books::Books(){
 
         std::cout<<"Enter No. of pages: ";
         std::cin>>curr->no_of_pages;
-        std::cin.ignore();
 
         std::cout<<"Enter No. of copies: ";
         std::cin>>curr->no_of_copies;
-        std::cin.ignore();
 
         std::cout<<"Enter ISBN: ";
         std::cin>>curr->ISBN;
-        std::cin.ignore();
         std::cout<<"\n";
 
         t->next = curr;
@@ -153,6 +143,7 @@ Books::Books(){
         t=curr;
 
         Btemp.list_books();
+        std::cin.ignore();
 
         std::cout<<"\nAdd book(enter) / Quit(q): ";
         std::getline(std::cin,str);
@@ -189,82 +180,64 @@ void Books::list_books() const {
   std::cout<<std::endl;
  }
 
-int Books::delete_book(const Books& Btemp){
-
-  int deleted_books=0;
-  std::string book_name{};
-  std::string str,contin;
-
-  do{
 
 
-    int num_book{1},count{1};
-    for(book* i=start;i!=nullptr;i=i->next){
-      num_book++;
-    }
+int Books::delete_book(const Books& Btemp) {
+    int deleted_books = 0;
+    std::string book_name{};
+    std::string str, contin;
 
-    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    do {
+        std::cin.ignore();
+        Btemp.list_books();
+        std::cout << "\nEnter The Name of the Book: ";
+        std::getline(std::cin, book_name);  
 
-    Btemp.list_books();
-    std::cout<<"\nEnter The Name of the Book: ";
-    std::cin.ignore();
-    std::getline(std::cin,book_name);
+        bool book_flag = false;
 
-    book* temp=start;
+        for (book* temp = start; temp != nullptr; temp = temp->next) {
+            if (to_lower_string(book_name) == to_lower_string(temp->Name)) {
+                // Deleting the book node
+                if (temp->next == nullptr && temp->prev == nullptr) {
+                    start = nullptr;
+                } else if (temp->prev == nullptr) {
+                    start = temp->next;
+                    start->prev = nullptr;
+                } else if (temp->next == nullptr) {
+                    temp->prev->next = nullptr;
+                } else {
+                    temp->next->prev = temp->prev;
+                    temp->prev->next = temp->next;
+                }
 
-  for(;temp!=nullptr;temp=temp->next){
+                std::cout << "\nPress Enter key to continue";
+                std::getline(std::cin, contin); 
 
-    if(to_lower_string(book_name)==to_lower_string(temp->Name)){
+                std::cout << "\n" << temp->Name << " has been deleted!\n";
+                delete temp;
+                book_flag = true;
+                deleted_books++;
+                break;
+            }
+        }
 
-    if(temp->next == nullptr && temp->prev== nullptr){
-      std::cout<<"\n"<<temp->Name<<" has been deleted!\n";
-        start = nullptr;
-        delete temp;
-        std::cout<<"\nPress Enter key to continue";
-        std::getline(std::cin,contin);
-        break;
-      } else if(temp->prev==nullptr){
-        (temp->next)->prev = nullptr;
-        start = temp->next;
-        std::cout<<"\n"<<temp->Name<<" has been deleted!\n";
-        delete temp;
-        std::cout<<"\nPress Enter key to continue";
-        std::getline(std::cin,contin);
-        break;
-      } else if(temp->next==nullptr) {
-        (temp->prev)->next=nullptr;
-        std::cout<<"\n"<<temp->Name<<" has been deleted!\n";
-        delete temp;
-        std::cout<<"\nPress Enter key to continue";
-        std::getline(std::cin,contin);
-        break;
-      } else {
-        (temp->next)->prev = temp->prev;
-        (temp->prev)->next = temp->next;
-        std::cout<<"\n"<<temp->Name<<" has been deleted!\n";
-        delete temp;
-        std::cout<<"\nPress Enter key to continue";
-        std::getline(std::cin,contin);
-        break;
-     }
-    }
-    count++;
-  }
-  Btemp.list_books();
+        if (!book_flag) {
+            std::cout << "\nBook not found!\n\n";
+        }
 
-  if(count == num_book)
-    std::cout<<"\nBook not found!\n\n";
+        //std::cout << "\nPress Enter key to continue";
+        //std::getline(std::cin, contin);  // Added to pause between deletions
 
-  std::cout<<"\nDelete Book(enter)/Quit(q) : ";
-  std::getline(std::cin,str);
-  deleted_books++;
+        std::cout << "\nDelete another Book (enter)/Quit (q): ";
+        std::getline(std::cin, str);
 
-  if(str == "q"){
-    std::cout<<std::endl;
+        if (str == "q") {
+            std::cout << std::endl;
+            return deleted_books;
+        }
+    } while (str != "q");
+
+    std::cout << std::endl;
     return deleted_books;
-  }
- }while(str!="q");
-  std::cout<<std::endl;
-  return deleted_books;
 }
 
