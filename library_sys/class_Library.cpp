@@ -17,7 +17,7 @@ Library::Library() = default;
 
     char choice;
 
-    std::cout<<"List all books(l)\nAdd books(a)\nDelete Book(d)\nQuit(q)";
+    std::cout<<"\nList all books(l)\nAdd books(a)\nDelete Book(d)\nQuit(q)";
     std::cout<<"\n\n~ ";
     std::cin>>choice;
 
