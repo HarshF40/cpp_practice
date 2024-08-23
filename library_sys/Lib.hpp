@@ -24,6 +24,8 @@ class Books{
 
     int delete_book(const Books& Btemp);
 
+    void searchBook(std::string str) const ;
+
 };
 
 

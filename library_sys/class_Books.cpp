@@ -264,3 +264,25 @@ int Books::delete_book(const Books& Btemp) {
     return deleted_books;
 }
 
+void Books::searchBook(std::string str) const {
+
+  book* temp=start;
+  bool flag = true;
+  for(;temp!=nullptr;temp=temp->next){
+    if(to_lower_string(str) == to_lower_string(temp->Name)){
+      flag=true;
+      std::cout<<"\nBook Name: "<<temp->Name<<"\nAuthor: "<<temp->Author<<"\nNo. of pages: "<<temp->no_of_pages<<"\nNo. of copies: "<<temp->no_of_copies<<"\nISBn: "<<temp->ISBN;
+      break;
+    } else 
+      flag = false;
+  }
+  if(!flag)
+    std::cout<<"Book Not Found!";
+
+  //for Pause
+  std::string sv;
+  std::cout<<"\n\nPress Any Key to continue!";
+  getline(std::cin,str);
+
+
+}
