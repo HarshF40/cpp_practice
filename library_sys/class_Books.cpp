@@ -13,6 +13,7 @@ Books::Books(){
 
    int book_counter=1;
    std::string str;
+   std::string book_name;
 
       Btemp.list_books();
 
@@ -60,13 +61,24 @@ Books::Books(){
 
          Btemp.list_books();
 
+loop2:
 
           curr = new book;
 
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
         std::cout<<"\nEnter The Name of the book "<<i+1<<": ";
-        std::getline(std::cin,curr->Name);
+        std::getline(std::cin,book_name);
+
+        for(book* i = start;i!=nullptr;i=i->next){
+          if(to_lower_string(i->Name) == to_lower_string(book_name)){
+            std::cout<<"\nBook Already Exists!\n\n\n";
+            goto loop2;
+          }
+        }
+
+        curr->Name = book_name;
+
 
         std::cout<<"Enter Author's name: ";
         std::getline(std::cin,curr->Author);
@@ -115,6 +127,8 @@ Books::Books(){
           int i=0;
           do{
 
+loop3:
+
             std::string str;
 
              curr = new book;
@@ -122,7 +136,16 @@ Books::Books(){
              std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
         std::cout<<"\nEnter The Name of the book "<<i+1<<": ";
-        std::getline(std::cin,curr->Name);
+        std::getline(std::cin,book_name);
+
+        for(book* i = start;i!=nullptr;i=i->next){
+          if(to_lower_string(i->Name) == to_lower_string(book_name)){
+            std::cout<<"\nBook Already Exists!\n\n\n";
+            goto loop3;
+          }
+        }
+
+        curr->Name=book_name;
 
         std::cout<<"Enter Author's name: ";
         std::getline(std::cin,curr->Author);
@@ -241,3 +264,25 @@ int Books::delete_book(const Books& Btemp) {
     return deleted_books;
 }
 
+void Books::searchBook(std::string str) const {
+
+  book* temp=start;
+  bool flag = true;
+  for(;temp!=nullptr;temp=temp->next){
+    if(to_lower_string(str) == to_lower_string(temp->Name)){
+      flag=true;
+      std::cout<<"\nBook Name: "<<temp->Name<<"\nAuthor: "<<temp->Author<<"\nNo. of pages: "<<temp->no_of_pages<<"\nNo. of copies: "<<temp->no_of_copies<<"\nISBn: "<<temp->ISBN;
+      break;
+    } else 
+      flag = false;
+  }
+  if(!flag)
+    std::cout<<"Book Not Found!";
+
+  //for Pause
+  std::string sv;
+  std::cout<<"\n\nPress Any Key to continue!";
+  getline(std::cin,str);
+
+
+}

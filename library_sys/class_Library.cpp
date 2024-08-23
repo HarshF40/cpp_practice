@@ -17,7 +17,7 @@ Library::Library() = default;
 
     char choice;
 
-    std::cout<<"\nList all books(l)\nAdd books(a)\nDelete Book(d)\nQuit(q)";
+    std::cout<<"\nList all books(l)\nAdd books(a)\nDelete Book(d)\nSearch Book(s)\nQuit(q)";
     std::cout<<"\n\n~ ";
     std::cin>>choice;
 
@@ -42,6 +42,16 @@ Library::Library() = default;
                  d_books = B.delete_book(B);
                  no_of_books_in_Lib-=d_books;
                  break;
+                 }
+
+      case 's' : {
+                   system("clear");
+                   std::string book_name;
+                   std::cout<<"\nEnter The Name of the Book: ";
+                   std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                   getline(std::cin,book_name);
+                   B.searchBook(book_name);
+                   break;
                  }
 
       case 'q' : return;
