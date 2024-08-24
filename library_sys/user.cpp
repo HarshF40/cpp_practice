@@ -28,28 +28,31 @@ void User::addUsers(){
 
     long unsigned int contact_no;
 
-    user* temp = new user;
+    std::string exit,name;
 
      std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
     std::cout<<"\nEnter Full Name: ";
-    std::getline(std::cin,temp->name);
+    std::getline(std::cin,name);
 
     std::cout<<"\nEnter Contact No. : ";
     std::cin>>contact_no;
 
-    for(user* temp=head;temp!=nullptr;temp=temp->next){
-      if(temp->contact_no == contact_no){
-        std::string exit;
+    for(user* i=head;i!=nullptr;i=i->next){
+      if(i->contact_no == contact_no){
         std::cout<<"\nUser Contact No already exists!";
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         std::cout<<"\nPress Enter to continue.";
         std::getline(std::cin,exit);
         std::cout<<"\n";
-        delete temp;
-        break;
+        delete i;
+        return;
       }
     }
+
+    user *temp = new user;
+    temp->contact_no = contact_no;
+    temp->name = name;
 
     last->next = temp;
     last = temp;
