@@ -45,10 +45,8 @@ void User::addUsers(){
         std::cout<<"\nPress Enter to continue.";
         std::getline(std::cin,exit);
         std::cout<<"\n";
-        delete i;
-        return;
-      }
-    }
+        break;
+      } else {
 
     user *temp = new user;
     temp->contact_no = contact_no;
@@ -57,6 +55,10 @@ void User::addUsers(){
     last->next = temp;
     last = temp;
     last->next=nullptr;
+        break;
+
+      }
+    }
 
   }
 
@@ -67,12 +69,13 @@ void User::listUsers() const {
   if(head==nullptr){
     std::cout<<"\nNo Users In The Library!";
   } else {
-    std::cout<<std::setw(20)<<std::left<<"Sr.No."<<std::setw(5)<<std::setw(20)<<std::left<<"User"<<std::setw(5)<<std::setw(20)<<std::left<<"Contact No.\n";
-    std::cout<<"-------------------------------------\n";
+    std::cout<<std::setw(20)<<std::left<<"Sr.No."<<std::setw(5)<<std::setw(5)<<std::left<<"User\n";
+    std::cout<<"_-_-_-_-_-_-_-_-_-_-_-_-_-\n";
     int i=1;
     user* temp;
+
   for(temp = head;temp!=nullptr;temp=temp->next,i++){
- std::cout<<std::setw(20)<<std::left<<i<<std::setw(5)<<std::setw(20)<<std::left<<temp->name<<std::setw(5)<<std::setw(20)<<std::left<<temp->contact_no<<'\n'; 
+ std::cout<<std::setw(20)<<std::left<<i<<std::setw(5)<<std::setw(5)<<std::left<<temp->name<<'\n'; 
   }
  }
   std::cout<<std::endl;
