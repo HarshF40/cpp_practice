@@ -22,6 +22,7 @@ class User{
     User();
     void addUsers();
     void listUsers() const ;
+    void deleteUser();
 
 };
 

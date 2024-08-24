@@ -26,6 +26,8 @@ void User::addUsers(){
 
   } else {
 
+    long unsigned int contact_no;
+
     user* temp = new user;
 
      std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
@@ -34,7 +36,20 @@ void User::addUsers(){
     std::getline(std::cin,temp->name);
 
     std::cout<<"\nEnter Contact No. : ";
-    std::cin>>temp->contact_no;
+    std::cin>>contact_no;
+
+    for(user* temp=head;temp!=nullptr;temp=temp->next){
+      if(temp->contact_no == contact_no){
+        std::string exit;
+        std::cout<<"\nUser Contact No already exists!";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cout<<"\nPress Enter to continue.";
+        std::getline(std::cin,exit);
+        std::cout<<"\n";
+        delete temp;
+        break;
+      }
+    }
 
     last->next = temp;
     last = temp;
@@ -58,4 +73,46 @@ void User::listUsers() const {
   }
  }
   std::cout<<std::endl;
+}
+
+void User::deleteUser(){
+
+  if(head == nullptr){
+    std::cout<<"\nNo Users";
+  } else {
+
+    listUsers();
+
+    long unsigned int contact_no;
+
+    std::cout<<"\nEnter The users contact No. : ";
+    std::cin>>contact_no;
+
+    bool flag = false;
+    user* temp = head;
+    user* follower = nullptr;
+    for(;temp!=nullptr;temp=temp->next){
+      if(temp->contact_no == contact_no){
+        flag = true;
+        if(temp == head){
+          head = head -> next;
+          std::cout<<temp->name<<" has been deleted!\n";          
+          delete temp;
+          break;
+        } else if(temp == last){
+          last = follower;
+          last->next=nullptr;
+          std::cout<<temp->name<<" has been deleted!\n";
+          delete temp;
+        } else {
+          follower->next = temp->next;
+          temp->next=nullptr;
+           std::cout<<temp->name<<" has been deleted!\n";
+           delete temp;
+        }
+      }
+      follower = temp;
+    }
+
+  }
 }
