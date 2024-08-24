@@ -9,13 +9,13 @@ Books::Books(){
   start = nullptr;
 }
 
- int Books::add_Books(const Books& Btemp){
+ int Books::add_Books(){
 
    int book_counter=1;
    std::string str;
    std::string book_name;
 
-      Btemp.list_books();
+      list_books();
 
       if(start == nullptr){
 
@@ -45,7 +45,7 @@ Books::Books(){
         start->next = nullptr;
         last = start;
 
-        Btemp.list_books();
+        list_books();
         std::cin.ignore();
 
         std::cout<<"\nAdd book(enter) / Quit(q): ";
@@ -59,7 +59,7 @@ Books::Books(){
 
        while(str!="q"){
 
-         Btemp.list_books();
+         list_books();
 
 loop2:
 
@@ -98,7 +98,7 @@ loop2:
         curr->next = nullptr;
         last = curr;
 
-        Btemp.list_books();
+        list_books();
         std::cin.ignore();
 
         std::cout<<"\nAdd book(enter) / Quit(q): ";
@@ -116,7 +116,7 @@ loop2:
 
       } else {
 
-        Btemp.list_books();
+        list_books();
 
           book *t,*curr;
 
@@ -165,7 +165,7 @@ loop3:
         curr->prev = t;
         t=curr;
 
-        Btemp.list_books();
+        list_books();
         std::cin.ignore();
 
         std::cout<<"\nAdd book(enter) / Quit(q): ";
@@ -205,14 +205,14 @@ void Books::list_books() const {
 
 
 
-int Books::delete_book(const Books& Btemp) {
+int Books::delete_book() {
     int deleted_books = 0;
     std::string book_name{};
     std::string str, contin;
 
     do {
         std::cin.ignore();
-        Btemp.list_books();
+        list_books();
         std::cout << "\nEnter The Name of the Book: ";
         std::getline(std::cin, book_name);  
 
@@ -248,9 +248,6 @@ int Books::delete_book(const Books& Btemp) {
             std::cout << "\nBook not found!\n\n";
         }
 
-        //std::cout << "\nPress Enter key to continue";
-        //std::getline(std::cin, contin);  // Added to pause between deletions
-
         std::cout << "\nDelete another Book (enter)/Quit (q): ";
         std::getline(std::cin, str);
 
@@ -281,7 +278,7 @@ void Books::searchBook(std::string str) const {
 
   //for Pause
   std::string sv;
-  std::cout<<"\n\nPress Any Key to continue!";
+  std::cout<<"\n\nPress Enter to continue!";
   getline(std::cin,str);
 
 
