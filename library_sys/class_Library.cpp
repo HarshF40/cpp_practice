@@ -21,7 +21,7 @@ Library::Library() = default;
 
     char choice;
 
-    std::cout<<"\nList all books(l)\nAdd books(a)\nDelete Book(d)\nSearch Book(s)\nAdd User(u)\nList Users(f)\nDelete User(e)\nQuit(q)";
+    std::cout<<"\nList all books(l)\nAdd books(a)\nDelete Book(d)\nSearch Book(s)\nAdd User(u)\nList Users(f)\nDelete User(e)\nBorrow Book(b)\nQuit(q)";
     std::cout<<green<<"\n\n~ "<<reset;
     std::cin>>choice;
 
@@ -73,6 +73,12 @@ Library::Library() = default;
       case 'e' : {
                    system("clear");
                    U.deleteUser();
+                   break;
+                 }
+
+      case 'b' : {
+                   system("clear");
+                   U.borrow_book(B);
                    break;
                  }
 

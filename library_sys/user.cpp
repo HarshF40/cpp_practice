@@ -22,6 +22,7 @@ void User::addUsers(){
     std::cin>>head->contact_no;
 
     head->next = nullptr;
+    head->start = nullptr;
     last=head;
 
   } else {
@@ -54,6 +55,7 @@ void User::addUsers(){
 
     last->next = temp;
     last = temp;
+    last->start = nullptr;
     last->next=nullptr;
         break;
 
@@ -122,3 +124,91 @@ void User::deleteUser(){
 
   }
 }
+
+void User::borrow_book(Books& B){
+
+  std::string userName;
+  std::string ibook_name;
+  user* find_user;
+  bool user_check_flag = false;
+  bool book_check_flag = false;
+  //Books::book* curr = B.start;
+
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+  std::cout<<"\nEnter User's Name: ";
+  getline(std::cin,userName);
+
+  for(find_user = head;find_user!=nullptr;find_user=find_user->next){
+    if(to_lower_string(userName) == to_lower_string(find_user->name))
+      user_check_flag = true;
+  }
+
+  if(!user_check_flag){
+    std::string exit;
+    std::cout<<"\nUser Not Found!\nEnter Press to continue";
+    std::getline(std::cin,exit);
+    return;
+  }
+
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+  std::cout<<"\nEnter The name of the book: ";
+  std::getline(std::cin,ibook_name);
+
+
+for(Books::book* curr = B.start;curr!=nullptr;curr=curr->next){
+  //seg fault
+  if(to_lower_string(ibook_name) == to_lower_string(curr->Name)){
+    book_check_flag = true;
+  break;
+  }
+}
+
+if(!book_check_flag){
+  std::string exit;
+  std::cout<<"\nBook Not Found!\nPress Enter To continue";
+  std::getline(std::cin,exit);
+  return;
+}
+
+if(find_user->start == nullptr){
+
+  beg = new book_borrowed;
+
+  find_user->start = beg;
+  (find_user->start)->book_name = ibook_name;
+  std::cout<<"\nToday's Date: ";
+  std::getline(std::cin,(find_user->start)->borrow_date);
+  std::cout<<"\nEnter Returning Date: ";
+  std::getline(std::cin,(find_user->start)->return_date);
+
+  (find_user->start)->next = nullptr;
+  beg = nullptr;
+  delete beg;
+  //copies--
+} else {
+
+  book_borrowed* walker = find_user->start;
+
+ for(;walker!=nullptr;walker=walker->next){}
+
+  book_borrowed* temp;
+
+  temp = new book_borrowed;
+
+  temp->book_name = ibook_name;
+  std::cout<<"\nToday's Date: ";
+  std::getline(std::cin,temp->borrow_date);
+  std::cout<<"\nEnter Returning Date: ";
+  std::getline(std::cin,temp->return_date);
+
+    walker->next = temp;
+    temp->next = nullptr ;
+
+    temp = nullptr;
+    delete temp;
+
+//copies--
+}
+
+}
+
