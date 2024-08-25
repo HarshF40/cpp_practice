@@ -129,18 +129,20 @@ void User::borrow_book(Books& B){
 
   std::string userName;
   std::string ibook_name;
-  user* find_user;
+  user* find_user,*follower;
   bool user_check_flag = false;
   bool book_check_flag = false;
-  //Books::book* curr = B.start;
+  Books::book* curr = B.start;
 
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
   std::cout<<"\nEnter User's Name: ";
   getline(std::cin,userName);
 
-  for(find_user = head;find_user!=nullptr;find_user=find_user->next){
+
+  for(find_user = head ;find_user!=nullptr;find_user=find_user->next){
     if(to_lower_string(userName) == to_lower_string(find_user->name))
       user_check_flag = true;
+    follower = find_user;
   }
 
   if(!user_check_flag){
@@ -150,18 +152,25 @@ void User::borrow_book(Books& B){
     return;
   }
 
+  //works
+  //std::cout<<curr->Name;
+  //
+  //Books::book* curr=B.start;
+
+
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
   std::cout<<"\nEnter The name of the book: ";
   std::getline(std::cin,ibook_name);
 
-
-for(Books::book* curr = B.start;curr!=nullptr;curr=curr->next){
-  //seg fault
+for(;curr!=nullptr;curr=curr->next){
+  std::cout<<curr->Name<<' ';
   if(to_lower_string(ibook_name) == to_lower_string(curr->Name)){
     book_check_flag = true;
   break;
   }
 }
+
+std::cout<<"\nOustide the loooooopppo!!!!!!";
 
 if(!book_check_flag){
   std::string exit;
@@ -170,24 +179,28 @@ if(!book_check_flag){
   return;
 }
 
-if(find_user->start == nullptr){
+if(follower->start == nullptr){
+
+  std::cout<<"\nInside if";
 
   beg = new book_borrowed;
 
-  find_user->start = beg;
-  (find_user->start)->book_name = ibook_name;
+  follower->start = beg;
+  (follower->start)->book_name = ibook_name;
   std::cout<<"\nToday's Date: ";
-  std::getline(std::cin,(find_user->start)->borrow_date);
+  std::getline(std::cin,(follower->start)->borrow_date);
   std::cout<<"\nEnter Returning Date: ";
-  std::getline(std::cin,(find_user->start)->return_date);
+  std::getline(std::cin,(follower->start)->return_date);
 
-  (find_user->start)->next = nullptr;
+  (follower->start)->next = nullptr;
   beg = nullptr;
   delete beg;
   //copies--
 } else {
 
-  book_borrowed* walker = find_user->start;
+  std::cout<<"Inside else";
+
+  book_borrowed* walker = follower->start;
 
  for(;walker!=nullptr;walker=walker->next){}
 
