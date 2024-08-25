@@ -202,7 +202,7 @@ if(follower->start == nullptr){
 
   book_borrowed* walker = follower->start;
 
- for(;walker!=nullptr;walker=walker->next){}
+ for(;walker->next!=nullptr;walker=walker->next){}
 
   book_borrowed* temp;
 
