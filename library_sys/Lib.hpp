@@ -28,6 +28,7 @@ class User {
     void listUsers() const ;
     void deleteUser();
     void borrow_book(Books& B);
+    void ListBorrowedBooksByUser() const ;
 
 };
 

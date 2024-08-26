@@ -152,25 +152,16 @@ void User::borrow_book(Books& B){
     return;
   }
 
-  //works
-  //std::cout<<curr->Name;
-  //
-  //Books::book* curr=B.start;
-
-
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
   std::cout<<"\nEnter The name of the book: ";
   std::getline(std::cin,ibook_name);
 
 for(;curr!=nullptr;curr=curr->next){
-  std::cout<<curr->Name<<' ';
   if(to_lower_string(ibook_name) == to_lower_string(curr->Name)){
     book_check_flag = true;
   break;
   }
 }
-
-std::cout<<"\nOustide the loooooopppo!!!!!!";
 
 if(!book_check_flag){
   std::string exit;
@@ -180,8 +171,6 @@ if(!book_check_flag){
 }
 
 if(follower->start == nullptr){
-
-  std::cout<<"\nInside if";
 
   beg = new book_borrowed;
 
@@ -197,8 +186,6 @@ if(follower->start == nullptr){
   delete beg;
   //copies--
 } else {
-
-  std::cout<<"Inside else";
 
   book_borrowed* walker = follower->start;
 
@@ -225,3 +212,38 @@ if(follower->start == nullptr){
 
 }
 
+void User::ListBorrowedBooksByUser() const {
+
+  system("clear");
+
+  std::string name;
+
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+  std::cout<<"\nEnter The Users Name: ";
+  std::getline(std::cin,name);
+
+  user *temp = head;
+
+  for(;temp!=nullptr;temp=temp->next){
+    if(to_lower_string(name) == to_lower_string(temp->name)){
+      break;
+    }
+  }
+
+  if(temp == nullptr){
+    std::cout<<"\nUser Not Found!!!";
+    return;
+  }
+
+  //
+  //
+
+ for(book_borrowed *i = temp->start ; i!=nullptr ; i=i->next){
+   //
+   //
+   std::cout<<"\n"<<i->book_name;
+ } 
+
+ std::cout<<'\n'<<std::endl;
+
+}
