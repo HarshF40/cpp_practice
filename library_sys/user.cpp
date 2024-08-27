@@ -164,10 +164,10 @@ void User::borrow_book(Books& B){
     //
     //
     //seg fault::::::
-    /*if(to_lower_string(curr->Name) == to_lower_string(ibook_name)){
+    if(to_lower_string(ibook_name) == to_lower_string(curr->Name)){
       book_check_flag = true;
       break;
-    }*/
+    }
   }
 
 if(book_check_flag == false){
