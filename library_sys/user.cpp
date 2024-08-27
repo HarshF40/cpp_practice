@@ -31,24 +31,27 @@ void User::addUsers(){
 
     std::string exit,name;
 
-     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
-    std::cout<<"\nEnter Full Name: ";
+    std::cout<<"\nEnter Full Name : ";
     std::getline(std::cin,name);
 
     std::cout<<"\nEnter Contact No. : ";
     std::cin>>contact_no;
 
-    for(user* i=head;i!=nullptr;i=i->next){
-      if(i->contact_no == contact_no){
-        std::cout<<"\nUser Contact No already exists!";
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-        std::cout<<"\nPress Enter to continue.";
-        std::getline(std::cin,exit);
-        std::cout<<"\n";
-        break;
-      } else {
+    bool check_contact = true;
 
+    for(user* i = head;i!=nullptr;i=i->next){
+      if(i->contact_no == contact_no){
+        check_contact = false;
+        break;
+      }
+    }
+
+    if(!check_contact){
+      std::cout<<"\nUser Not Found!";
+      std::cout<<std::endl;
+    } else {
     user *temp = new user;
     temp->contact_no = contact_no;
     temp->name = name;
@@ -57,9 +60,8 @@ void User::addUsers(){
     last = temp;
     last->start = nullptr;
     last->next=nullptr;
-        break;
+    delete temp;
 
-      }
     }
 
   }
@@ -129,10 +131,9 @@ void User::borrow_book(Books& B){
 
   std::string userName;
   std::string ibook_name;
-  user* find_user,*follower;
+  user *find_user,*follower;
   bool user_check_flag = false;
   bool book_check_flag = false;
-  Books::book* curr = B.start;
 
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
   std::cout<<"\nEnter User's Name: ";
@@ -142,28 +143,34 @@ void User::borrow_book(Books& B){
   for(find_user = head ;find_user!=nullptr;find_user=find_user->next){
     if(to_lower_string(userName) == to_lower_string(find_user->name))
       user_check_flag = true;
-    follower = find_user;
+    break;
+      //follower = find_user;
   }
 
-  if(!user_check_flag){
+  if(user_check_flag == false){
     std::string exit;
     std::cout<<"\nUser Not Found!\nEnter Press to continue";
     std::getline(std::cin,exit);
-    return;
-  }
+  } else {
 
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
   std::cout<<"\nEnter The name of the book: ";
   std::getline(std::cin,ibook_name);
 
-for(;curr!=nullptr;curr=curr->next){
-  if(to_lower_string(ibook_name) == to_lower_string(curr->Name)){
-    book_check_flag = true;
-  break;
+  for(Books::book *curr = B.start; curr!=nullptr; curr=curr->next){
+    //std::cout<<cuur->Name; --> works
+    //std::cout<<to_lower_string(curr->Name); --> works
+    //std::cout<<ibook_name; -->works
+    //
+    //
+    //seg fault::::::
+    /*if(to_lower_string(curr->Name) == to_lower_string(ibook_name)){
+      book_check_flag = true;
+      break;
+    }*/
   }
-}
 
-if(!book_check_flag){
+if(book_check_flag == false){
   std::string exit;
   std::cout<<"\nBook Not Found!\nPress Enter To continue";
   std::getline(std::cin,exit);
@@ -174,16 +181,17 @@ if(follower->start == nullptr){
 
   beg = new book_borrowed;
 
-  follower->start = beg;
-  (follower->start)->book_name = ibook_name;
+  beg->book_name = ibook_name;
   std::cout<<"\nToday's Date: ";
-  std::getline(std::cin,(follower->start)->borrow_date);
+  std::getline(std::cin,beg->borrow_date);
   std::cout<<"\nEnter Returning Date: ";
-  std::getline(std::cin,(follower->start)->return_date);
+  std::getline(std::cin,beg->return_date);
 
-  (follower->start)->next = nullptr;
-  beg = nullptr;
-  delete beg;
+  follower->start = beg;
+  beg->next = nullptr;
+
+
+
   //copies--
 } else {
 
@@ -210,6 +218,7 @@ if(follower->start == nullptr){
 //copies--
 }
 
+ }
 }
 
 void User::ListBorrowedBooksByUser() const {
@@ -235,13 +244,13 @@ void User::ListBorrowedBooksByUser() const {
     return;
   }
 
-  //
-  //
+  std::cout<<temp->name;
 
  for(book_borrowed *i = temp->start ; i!=nullptr ; i=i->next){
-   //
-   //
-   std::cout<<"\n"<<i->book_name;
+   std::cout<<"\nBook Name: "<<i->book_name;
+   std::cout<<"\nBorrow Date: "<<i->borrow_date;
+   std::cout<<"\nReturn Date: "<<i->return_date;
+   std::cout<<'\n';
  } 
 
  std::cout<<'\n'<<std::endl;

@@ -72,6 +72,6 @@ class Library{
 
 };
 
-const std::string to_lower_string(std::string_view sv);
+const std::string to_lower_string(std::string sv);
 
 #endif
