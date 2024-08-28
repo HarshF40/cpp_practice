@@ -179,6 +179,19 @@ void User::borrow_book(Books& B){
         temp->next = nullptr;
         Ucurr->start = temp;
         temp = nullptr;
+      } else {
+        book_borrowed* b_last = Ucurr->start;
+        for(; b_last -> next != nullptr; b_last = b_last -> next){}
+        book_borrowed* temp = new book_borrowed;
+        temp->book_name = Bcurr->Name;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cout<<"\nBorrow Date: ";
+        std::getline(std::cin,temp->borrow_date);
+        std::cout<<"\nReturn Date: ";
+        std::getline(std::cin,temp->return_date);
+        temp->next = nullptr;
+        b_last->next = temp;
+        temp = nullptr;
       }
     }
 
