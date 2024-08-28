@@ -12,7 +12,7 @@ class User {
       std::string borrow_date;
       std::string return_date;
       book_borrowed* next;
-    }*beg;
+    };
 
     struct user{
       std::string name;

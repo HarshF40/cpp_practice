@@ -129,100 +129,61 @@ void User::deleteUser(){
 
 void User::borrow_book(Books& B){
 
-  std::string userName;
-  std::string ibook_name;
-  user *find_user,*follower;
-  bool user_check_flag = false;
-  bool book_check_flag = false;
+  system("clear");
 
-  std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-  std::cout<<"\nEnter User's Name: ";
-  getline(std::cin,userName);
+  bool check_book = false;
 
-
-  for(find_user = head ;find_user!=nullptr;find_user=find_user->next){
-    if(to_lower_string(userName) == to_lower_string(find_user->name)){
-      user_check_flag = true;
-    break;
-    }
-  }
-
-  if(user_check_flag == false){
-    std::string exit;
-    std::cout<<"\nUser Not Found!\nEnter Press to continue";
-    std::getline(std::cin,exit);
-  } else {
-
-  std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-  std::cout<<"\nEnter The name of the book: ";
-  std::getline(std::cin,ibook_name);
-
-  for(Books::book *curr = B.start; curr!=nullptr; curr=curr->next){
-     //if(curr==nullptr)
-      std::cout<<"Fault! MF";
-    //std::cout<<curr->Name; --> works
-    //std::cout<<to_lower_string(curr->Name); --> works
-    //std::cout<<ibook_name; -->works
-    //
-    //
-    //seg fault::::::
-     std::cout<<"Hi"; 
-    if(to_lower_string(ibook_name) == to_lower_string(curr->Name)){
-      std::cout<<curr->Name;
-      book_check_flag = true;
+  std::cout<<"\nEnter Book Name: ";
+  std::string book_name;
+  std::cin>>book_name;
+  Books::book *Bcurr=B.start;
+  for(;Bcurr!=nullptr;){
+    //std::cout<<curr->Name;
+    if(to_lower_string(book_name) == to_lower_string(Bcurr->Name)){
+      check_book = true;
       break;
     }
+    Bcurr=Bcurr->next;
   }
 
-if(book_check_flag == false){
-  std::string exit;
-  std::cout<<"\nBook Not Found!\nPress Enter To continue";
-  std::getline(std::cin,exit);
-  return;
-}
+  if(check_book == false){
+    std::cout<<"Book Not Found!";
+  } else {
 
-if(follower->start == nullptr){
+    bool check_user = false;
 
-  beg = new book_borrowed;
+    std::cout<<"\nEnter Users Name: ";
+    std::string user_name;
+    std::cin>>user_name;
+    user *Ucurr = head;
+    for(;Ucurr!=nullptr;){
+      //std::cout<<Ucurr->name;
+      if(to_lower_string(user_name) == to_lower_string(Ucurr->name)){
+        check_user = true;
+        break;
+      }
+      Ucurr=Ucurr->next;
+    }
 
-  beg->book_name = ibook_name;
-  std::cout<<"\nToday's Date: ";
-  std::getline(std::cin,beg->borrow_date);
-  std::cout<<"\nEnter Returning Date: ";
-  std::getline(std::cin,beg->return_date);
+    if(check_user == false){
+      std::cout<<"\nUser Not Found!";
+    } else {
+      if(Ucurr->start == nullptr){
+        book_borrowed* temp = new book_borrowed;
+        temp->book_name = Bcurr->Name;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cout<<"\nBorrow Date: ";
+        std::getline(std::cin,temp->borrow_date);
+        std::cout<<"\nReturn Date: ";
+        std::getline(std::cin,temp->return_date);
+        temp->next = nullptr;
+        Ucurr->start = temp;
+        temp = nullptr;
+      }
+    }
 
-  follower->start = beg;
-  beg->next = nullptr;
+  }
 
-
-
-  //copies--
-} else {
-
-  book_borrowed* walker = follower->start;
-
- for(;walker->next!=nullptr;walker=walker->next){}
-
-  book_borrowed* temp;
-
-  temp = new book_borrowed;
-
-  temp->book_name = ibook_name;
-  std::cout<<"\nToday's Date: ";
-  std::getline(std::cin,temp->borrow_date);
-  std::cout<<"\nEnter Returning Date: ";
-  std::getline(std::cin,temp->return_date);
-
-    walker->next = temp;
-    temp->next = nullptr ;
-
-    temp = nullptr;
-    delete temp;
-
-//copies--
-}
-
- }
 }
 
 void User::ListBorrowedBooksByUser() const {
