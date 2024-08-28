@@ -1,7 +1,9 @@
 #ifndef LIB_HPP
 #define LIB_HPP
 
-class User{
+class Books;
+
+class User {
 
   private:
 
@@ -9,12 +11,14 @@ class User{
       std::string book_name;
       std::string borrow_date;
       std::string return_date;
-    }*beg;
+      book_borrowed* next;
+    };
 
     struct user{
       std::string name;
       long unsigned int contact_no;
       user* next;
+      book_borrowed* start=nullptr;
     }*head,*last;
 
   public: 
@@ -23,6 +27,8 @@ class User{
     void addUsers();
     void listUsers() const ;
     void deleteUser();
+    void borrow_book(Books& B);
+    void ListBorrowedBooksByUser() const ;
 
 };
 
@@ -30,7 +36,7 @@ class User{
 
 class Books{
 
-  private:
+  public:
 
     struct book{                    
       std::string Name;
@@ -41,16 +47,10 @@ class Books{
       book *prev,*next;
     }*start;
 
-  public:
-
     Books();
-
     int add_Books();
-
     void list_books() const ;
-
     int delete_book();
-
     void searchBook(std::string str) const ;
 
 };
@@ -72,6 +72,6 @@ class Library{
 
 };
 
-const std::string to_lower_string(std::string_view sv);
+const std::string to_lower_string(std::string sv);
 
 #endif

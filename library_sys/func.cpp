@@ -4,7 +4,7 @@
 #include<cctype>
 #include"Lib.hpp"
 
-const std::string to_lower_string(std::string_view sv){
+const std::string to_lower_string(std::string sv){
   std::string result(sv.size(),' ');
   std::transform(sv.begin(),sv.end(),result.begin(),::tolower);
   return result;

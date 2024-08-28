@@ -161,9 +161,9 @@ loop3:
         std::cout<<"\n";
 
         t->next = curr;
-        curr->next = nullptr;
         curr->prev = t;
         t=curr;
+        t->next = nullptr;
 
         list_books();
         std::cin.ignore();
