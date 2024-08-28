@@ -60,7 +60,7 @@ void User::addUsers(){
     last = temp;
     last->start = nullptr;
     last->next=nullptr;
-    delete temp;
+
 
     }
 
@@ -141,10 +141,10 @@ void User::borrow_book(Books& B){
 
 
   for(find_user = head ;find_user!=nullptr;find_user=find_user->next){
-    if(to_lower_string(userName) == to_lower_string(find_user->name))
+    if(to_lower_string(userName) == to_lower_string(find_user->name)){
       user_check_flag = true;
     break;
-      //follower = find_user;
+    }
   }
 
   if(user_check_flag == false){
@@ -158,13 +158,17 @@ void User::borrow_book(Books& B){
   std::getline(std::cin,ibook_name);
 
   for(Books::book *curr = B.start; curr!=nullptr; curr=curr->next){
-    //std::cout<<cuur->Name; --> works
+     //if(curr==nullptr)
+      std::cout<<"Fault! MF";
+    //std::cout<<curr->Name; --> works
     //std::cout<<to_lower_string(curr->Name); --> works
     //std::cout<<ibook_name; -->works
     //
     //
     //seg fault::::::
+     std::cout<<"Hi"; 
     if(to_lower_string(ibook_name) == to_lower_string(curr->Name)){
+      std::cout<<curr->Name;
       book_check_flag = true;
       break;
     }
