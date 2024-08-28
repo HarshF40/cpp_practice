@@ -165,7 +165,7 @@ void User::borrow_book(Books& B){
     std::cout<<"\nEnter Users Name: ";
     std::string user_name;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-    std::cin>>user_name;
+    std::getline(std::cin,user_name);
     user *Ucurr = head;
     for(;Ucurr!=nullptr;){
       if(to_lower_string(user_name) == to_lower_string(Ucurr->name)){
