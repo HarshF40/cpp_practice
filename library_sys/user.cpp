@@ -8,6 +8,7 @@ head = nullptr;
 
 void User::addUsers(){
 
+  do{
 
   if(head == nullptr){
 
@@ -49,7 +50,7 @@ void User::addUsers(){
     }
 
     if(!check_contact){
-      std::cout<<"\nUser Not Found!";
+      std::cout<<"\nUser Already Exists!";
       std::cout<<std::endl;
     } else {
     user *temp = new user;
@@ -65,6 +66,16 @@ void User::addUsers(){
     }
 
   }
+
+    char choice;
+    std::cout<<"\nAdd User(u)/Quit(q): ";
+    std::cin>>choice;
+
+    if(choice == 'q')
+      break;
+
+    system("clear");
+  }while(true);
 
 }
 
@@ -138,7 +149,6 @@ void User::borrow_book(Books& B){
   std::cin>>book_name;
   Books::book *Bcurr=B.start;
   for(;Bcurr!=nullptr;){
-    //std::cout<<curr->Name;
     if(to_lower_string(book_name) == to_lower_string(Bcurr->Name)){
       check_book = true;
       break;
@@ -154,10 +164,10 @@ void User::borrow_book(Books& B){
 
     std::cout<<"\nEnter Users Name: ";
     std::string user_name;
-    std::cin>>user_name;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    std::getline(std::cin,user_name);
     user *Ucurr = head;
     for(;Ucurr!=nullptr;){
-      //std::cout<<Ucurr->name;
       if(to_lower_string(user_name) == to_lower_string(Ucurr->name)){
         check_user = true;
         break;
@@ -218,11 +228,9 @@ void User::ListBorrowedBooksByUser() const {
   }
 
   if(temp == nullptr){
-    std::cout<<"\nUser Not Found!!!";
+    std::cout<<"\nUser Not Found!!!"<<std::endl;
     return;
   }
-
-  std::cout<<temp->name;
 
  for(book_borrowed *i = temp->start ; i!=nullptr ; i=i->next){
    std::cout<<"\nBook Name: "<<i->book_name;

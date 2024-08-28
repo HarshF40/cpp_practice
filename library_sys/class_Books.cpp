@@ -12,7 +12,7 @@ Books::Books(){
  int Books::add_Books(){
 
    int book_counter=1;
-   std::string str;
+   char str;
    std::string book_name;
 
       list_books();
@@ -46,18 +46,17 @@ Books::Books(){
         last = start;
 
         list_books();
-        std::cin.ignore();
 
-        std::cout<<"\nAdd book(enter) / Quit(q): ";
-        std::getline(std::cin,str);
-        if(str == "q"){
+        std::cout<<"\nAdd book(any letter) / Quit(q): ";
+        std::cin>>str;
+        if(str == 'q'){
           std::cout<<std::endl;
           return book_counter; 
         }
 
         int i=1;
 
-       while(str!="q"){
+       while(str!='q'){
 
          list_books();
 
@@ -99,15 +98,14 @@ loop2:
         last = curr;
 
         list_books();
-        std::cin.ignore();
 
-        std::cout<<"\nAdd book(enter) / Quit(q): ";
-        std::getline(std::cin,str);
+        std::cout<<"\nAdd book(any letter) / Quit(q): ";
+        std::cin>>str;
 
         i++;
         book_counter++;
 
-        if(str == "q"){
+        if(str == 'q'){
           std::cout<<std::endl;
           return book_counter;
         }
@@ -129,7 +127,7 @@ loop2:
 
 loop3:
 
-            std::string str;
+            char str;
 
              curr = new book;
 
@@ -166,20 +164,19 @@ loop3:
         t->next = nullptr;
 
         list_books();
-        std::cin.ignore();
 
-        std::cout<<"\nAdd book(enter) / Quit(q): ";
-        std::getline(std::cin,str);
+        std::cout<<"\nAdd book(any letter) / Quit(q): ";
+        std::cin>>str; 
 
         i++;
         book_counter++;
 
-        if(str == "q"){
+        if(str == 'q'){
           std::cout<<std::endl;
           return book_counter;
         }
         
-           }while(str!="q");
+           }while(str!='q');
         }
       //just beacuse of error : )
       std::cout<<std::endl;
@@ -208,7 +205,8 @@ void Books::list_books() const {
 int Books::delete_book() {
     int deleted_books = 0;
     std::string book_name{};
-    std::string str, contin;
+    std::string contin;
+    char str;
 
     do {
         std::cin.ignore();
@@ -248,14 +246,14 @@ int Books::delete_book() {
             std::cout << "\nBook not found!\n\n";
         }
 
-        std::cout << "\nDelete another Book (enter)/Quit (q): ";
-        std::getline(std::cin, str);
+        std::cout << "\nDelete another Book (any letter)/Quit (q): ";
+        std::cin>>str;
 
-        if (str == "q") {
+        if (str == 'q') {
             std::cout << std::endl;
             return deleted_books;
         }
-    } while (str != "q");
+    } while (str != 'q');
 
     std::cout << std::endl;
     return deleted_books;
