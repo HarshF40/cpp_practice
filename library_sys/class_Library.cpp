@@ -14,7 +14,7 @@ Library::Library() = default;
       bool on = true;
 
       std::cout<<"\n\n";
-      std::cout<<std::setw(30)<<blue<<"\\\\\\\\\\\\\\\\_YuLib_////////";
+      std::cout<<std::setw(30)<<std::left<<blue<<"\\\\\\\\\\\\\\\\_YuLib_////////";
   std::cout<<"\n\n\n"<<reset;
 
   while(on){
@@ -50,6 +50,7 @@ Library::Library() = default;
 
       case 's' : {
                    system("clear");
+                   B.list_books();
                    std::string book_name;
                    std::cout<<"\nEnter The Name of the Book: ";
                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
