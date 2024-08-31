@@ -60,9 +60,9 @@ Books::Books(){
 
          list_books();
 
-loop2:
+//loop2:
 
-          curr = new book;
+          //curr = new book;
 
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
@@ -71,10 +71,14 @@ loop2:
 
         for(book* i = start;i!=nullptr;i=i->next){
           if(to_lower_string(i->Name) == to_lower_string(book_name)){
-            std::cout<<"\nBook Already Exists!\n\n\n";
-            goto loop2;
+            std::cout<<"\nBook Copy added.\n\n\n";
+            (i->no_of_copies)++;
+            //goto loop2;
+            return 0;
           }
         }
+
+        curr = new book;
 
         curr->Name = book_name;
 
@@ -125,7 +129,7 @@ loop2:
           int i=0;
           do{
 
-loop3:
+//loop3:
 
             char str;
 
@@ -138,8 +142,10 @@ loop3:
 
         for(book* i = start;i!=nullptr;i=i->next){
           if(to_lower_string(i->Name) == to_lower_string(book_name)){
-            std::cout<<"\nBook Already Exists!\n\n\n";
-            goto loop3;
+            std::cout<<"\nBook Copy added.\n\n\n";
+            (i->no_of_copies)++;
+            //goto loop3;
+            return 0;
           }
         }
 
