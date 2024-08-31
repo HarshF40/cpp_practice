@@ -26,6 +26,8 @@ void User::addUsers(){
     head->start = nullptr;
     last=head;
 
+    std::cout<<"\nUser Added Succesfully!\n";
+
   } else {
 
     long unsigned int contact_no;
@@ -62,6 +64,7 @@ void User::addUsers(){
     last->start = nullptr;
     last->next=nullptr;
 
+    std::cout<<"\nUser Added successfully!\n";
 
     }
 
@@ -241,4 +244,50 @@ void User::ListBorrowedBooksByUser() const {
 
  std::cout<<'\n'<<std::endl;
 
+}
+
+void User::ReturnBook(){
+  system("clear");
+  std::cout<<"\nEnter Users Name: ";
+  std::string uname;
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+  std::getline(std::cin,uname);
+  user *u = head;
+  for(;u!=nullptr;u=u->next){
+    if(to_lower_string(uname) == to_lower_string(u->name))
+      break;
+  }
+  if(u==nullptr){
+    std::cout<<"\nUser Not Found!";
+  }else{
+    std::string bname;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    std::cout<<"\nEnter Book Name: ";
+    std::getline(std::cin,bname);
+
+    book_borrowed *temp,*follower;
+    for(temp = u->start;temp!=nullptr;temp=temp->next){
+      if(to_lower_string(bname) == to_lower_string(temp->book_name)){
+        std::cout<<"true";
+        break;
+      }
+
+      follower = temp;
+    }
+
+    if(temp == nullptr){
+      std::cout<<"\nBook not found!";
+    } else {
+      if(temp == u->start){
+        u->start = nullptr;
+        delete temp;
+      } else {
+        follower->next = temp -> next;
+        temp->next = nullptr;
+        delete temp;
+      }
+      std::cout<<"\nBook has been deleted successfully!";
+  }
+    std::cout<<'\n';
+}
 }
