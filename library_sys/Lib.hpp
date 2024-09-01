@@ -19,6 +19,7 @@ class User {
       long unsigned int contact_no;
       user* next;
       book_borrowed* start=nullptr;
+      int no_of_bookBorrowed{};
     }*head,*last;
 
   public: 
@@ -30,6 +31,7 @@ class User {
     void borrow_book(Books& B);
     void ListBorrowedBooksByUser() const ;
     void ReturnBook();
+    void userDetails () const;
 
 };
 
