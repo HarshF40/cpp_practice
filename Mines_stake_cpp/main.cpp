@@ -3,7 +3,7 @@
 #include<optional>
 #include<random>
 
-float money;
+float money; 
 
 void gen_mine(char (*arr_ptr2)[5],int num_of_mines1){ // Generates mines using mersenne twister random number generator from the device.
   std::random_device rd{};
