@@ -5,9 +5,7 @@
 #include<iomanip>
 #include"Lib.hpp"
 
-Books::Books(){
-  start = nullptr;
-}
+Books::Books(){start = nullptr;}
 
  int Books::add_Books(){
 

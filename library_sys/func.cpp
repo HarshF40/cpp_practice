@@ -7,5 +7,5 @@
 const std::string to_lower_string(std::string sv){
   std::string result(sv.size(),' ');
   std::transform(sv.begin(),sv.end(),result.begin(),::tolower);
-  return result;
+  return result; 
 }

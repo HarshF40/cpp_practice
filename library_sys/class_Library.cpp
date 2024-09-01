@@ -3,7 +3,7 @@
 #include<iomanip>
 #include"Lib.hpp"
 
-#define blue "\033[36m"
+#define blue "\033[36m" 
 #define green "\033[32m"
 #define reset "\033[0m"
 

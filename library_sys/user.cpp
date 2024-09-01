@@ -6,7 +6,7 @@ User::User() {
 head = nullptr;
 }
 
-void User::addUsers(){
+void User::addUsers(){ 
 
   do{
 
