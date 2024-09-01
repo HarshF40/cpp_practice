@@ -152,6 +152,7 @@ void User::borrow_book(Books& B){
 
   std::cout<<"\nEnter Book Name: ";
   std::getline(std::cin,book_name);
+  std::cout<<"\nPress Enter To Continue!";
   Books::book *Bcurr=B.start;
   for(;Bcurr!=nullptr;){
     if(to_lower_string(book_name) == to_lower_string(Bcurr->Name)){
@@ -174,7 +175,7 @@ void User::borrow_book(Books& B){
     std::cout<<"\nEnter Users Name: ";
     std::getline(std::cin,user_name);
 
-    std::cout<"Press Enter To Continue!";
+    std::cout<<"Press Enter To Continue!";
 
     user *Ucurr = head;
     for(;Ucurr!=nullptr;){
@@ -262,6 +263,7 @@ void User::ReturnBook(){
   std::string uname;
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
   std::getline(std::cin,uname);
+  std::cout<<"Press Enter To Continue!";
   user *u = head;
   for(;u!=nullptr;u=u->next){
     if(to_lower_string(uname) == to_lower_string(u->name))
@@ -290,10 +292,12 @@ void User::ReturnBook(){
       if(temp == u->start){
         u->start = nullptr;
         delete temp;
+        (u->no_of_bookBorrowed)--;
       } else {
         follower->next = temp -> next;
         temp->next = nullptr;
         delete temp;
+        (u->no_of_bookBorrowed)--;
       }
       std::cout<<"\nBook has been returned successfully!";
   }
