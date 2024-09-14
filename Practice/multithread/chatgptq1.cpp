@@ -11,13 +11,25 @@
 std::mutex gLock;
 
 void partial_sum(unsigned int& ival,const std::vector<int>& arr,int& sum,unsigned int thread_num){
-  gLock.lock();
-  int temp = ival;
-  for(int i=ival ; i<((arr.size()/thread_num)+temp) ; i++){
-    sum+=arr[i];
-    ival++;
+
+  int temp;
+
+  {
+  std::lock_guard<std::mutex> lock_guard(gLock);
+  temp = ival;
+  ival += arr.size()/thread_num;
   }
-  gLock.unlock();
+
+  int local_sum = 0;
+  for(int i=temp ; i<ival ; i++){
+    local_sum+=arr[i];
+  }
+
+  {
+    std::lock_guard<std::mutex> lock_guard(gLock);
+    sum+=local_sum;
+  }
+
 }
 
 int main(){
