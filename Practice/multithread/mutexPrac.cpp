@@ -8,10 +8,9 @@ std::mutex glock;
 
 //function used by each individual thread.
 void shared_value_increment(){
- glock.lock();
+  std::lock_guard<std::mutex> lg(glock);
     std::cout<<"\nHello From: "<<std::this_thread::get_id();
     shared_value++;
- glock.unlock();
 }
 
 int main(){
