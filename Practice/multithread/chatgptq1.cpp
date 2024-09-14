@@ -8,14 +8,14 @@
 #include<mutex>
 #include<functional>
 
-std::mutex gLock;
+std::mutex gLock1,gLock2;
 
 void partial_sum(unsigned int& ival,const std::vector<int>& arr,int& sum,unsigned int thread_num){
 
   int temp;
 
   {
-  std::lock_guard<std::mutex> lock_guard(gLock);
+  std::lock_guard<std::mutex> lock_guard(gLock1);
   temp = ival;
   ival += arr.size()/thread_num;
   }
@@ -26,7 +26,7 @@ void partial_sum(unsigned int& ival,const std::vector<int>& arr,int& sum,unsigne
   }
 
   {
-    std::lock_guard<std::mutex> lock_guard(gLock);
+    std::lock_guard<std::mutex> lock_guard(gLock2);
     sum+=local_sum;
   }
 
