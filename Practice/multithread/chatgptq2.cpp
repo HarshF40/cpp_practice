@@ -1,3 +1,11 @@
+//works but it waits for other thread complete its work then it does it own... 
+//which was not intended because its produces output in
+//produce - consume - produce - consume manner
+//and what i wanted was it to be random and it should execute independently
+//here this doesnt work because i used condition_variable
+//in the other version i didnt use condition variables.... 
+//so it works as i wanted
+
 #include<iostream>
 #include<vector>
 #include<thread>
