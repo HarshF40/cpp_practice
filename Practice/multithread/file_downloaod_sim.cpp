@@ -15,18 +15,17 @@ std::uniform_int_distribution prosTims{1,3};
 void download_file(int file_id) {
   std::unique_lock<std::mutex> lock(dlock);
     int dtime = downTime(mt);  
-    std::cout<<"\nDownloading File "<<file_id<<"... : ("<<dtime<<" seconds)";
-    //std::cout<<"\nThread sleeping "<<std::this_thread::get_id();
+    std::cout<<"Downloading File "<<file_id<<"... : ("<<dtime<<" seconds)"<<std::endl;
   lock.unlock();
 
-    std::cout<<"\n";
+    //std::cout<<"\n";
     std::this_thread::sleep_for(std::chrono::seconds(dtime));
 
       
   std::unique_lock<std::mutex> lock2(slock);
-    std::cout<<"\nFile "<<file_id<<" downloaded successfully!";
+    std::cout<<"File "<<file_id<<" downloaded successfully!"<<std::endl;
   lock2.unlock();
-  std::cout<<"\n";
+  //std::cout<<"\n";
 }
 
 
