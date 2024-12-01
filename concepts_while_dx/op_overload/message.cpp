@@ -1,4 +1,5 @@
 #include "message.hpp"
+#include<iostream>
 
 #define REGISTER_PAIR(msg) {msg,#msg} //function like macro where msg is the parameter and the things inside the curly braces is the things which will be extended when REGISTER_PAIR will be used... #msg concerts the msg to string value...
 
@@ -10,5 +11,6 @@ Message::Message() : map ({
 }) {}
 
 std::string Message::operator()(DWORD key){
+    const auto it = map.find(key);
     return map[key];
 }
