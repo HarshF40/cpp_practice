@@ -8,6 +8,9 @@ std::size_t rpos(const std::vector<int>& arr){
 	int mid;
 	while(low<=high){
 		mid = ((low+high)/2);
+		if(mid > 0 && arr[mid - 1] == arr[mid]){ //To handle the repeating number case
+			mid = mid - 1;
+		}
 		if(mid > 0 && ((arr[mid-1] > arr[mid]) || (low == high && high == mid))){
 			return mid;
 		}
@@ -21,7 +24,7 @@ std::size_t rpos(const std::vector<int>& arr){
 }
 
 int main(){
-	std::vector<int> arr = {6,7,8,9,10,11,1};
+	std::vector<int> arr = {6,6,9,9,0,0,2,3,3,3,4,4};
 	std::cout<<"Position: "<<rpos(arr);
 	return 0;
 }
