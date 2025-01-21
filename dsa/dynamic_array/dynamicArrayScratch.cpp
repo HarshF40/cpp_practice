@@ -11,7 +11,7 @@
 template <typename T>
 class Node{
 	public:
-		std::optional<T> data = std::nullopt;
+		std::optional<T> data = static_cast<T>(0);
 		Node<T>* next = nullptr;
 };
 
@@ -80,29 +80,75 @@ class Base{
 
 		void list(){
 			for(Node<T> *temp = base; temp!=nullptr; temp=temp->next){
-				if(temp)
 				std::cout<<*temp->data<<" ";
-				else
-				std::cout<<"?";
 			}
 			std::cout<<std::endl;
 		}
 
 		const T _front(){
+			if(!base) {std::cout<<"Empty Array."; return;}
 			return *base->data;
 		}
 
 		const T _back(){
+			if(!base) {std::cout<<"Empty Array."; return;}
 			Node<T> *temp = base;
-			while(temp->next){}
+			while(temp->next){ temp = temp->next; }
 			return *temp->data;
+		}
+
+		Node<T>* _data(){
+			return base;
+		}
+		
+		void _push_back(T element){
+			if(!base) {std::cout<<"Empty Array."; return;}
+			Node<T>* temp = base;
+			while(temp->next) { temp = temp->next; }
+			temp->next = new Node<T>{element};
+			size++;
+		}
+
+		void _pop_back(){
+			if(!base) {std::cout<<"Empty Array."; return;}
+			if(!base->next){
+				Node<T> *temp = base;
+				base = nullptr;
+				delete temp;
+			} else {
+				Node<T> *temp = base;
+				while(temp->next->next){ temp = temp->next; }
+				Node<T> *another_temp = temp->next;
+				temp->next = nullptr;
+				delete another_temp;
+				size--;
+			}
+		}
+
+		void _insert(std::size_t index, T value){
+			if (index > size + 1){
+				_push_back(value);
+			}else if(!base) {
+				base = new Node<T>{value};
+			} else {
+				Node<T> *temp = base;
+				for(std::size_t i = 0; i < index - 2; i++, temp = temp->next){}
+				Node<T> *new_node = new Node<T>{value};
+				new_node->next = temp->next;
+				temp->next = new_node;
+				size++;
+			}
 		}
 
 };
 
 int main(){
 	Base<int> base(3);
-	base[0] = 5;
-	std::cout<<base._front()<<base._length();
+	base[0] = 1;
+	base[1] = 2;
+	base[2] = 3;
+	base.list();
+	base._insert(5, 99);
+	base.list();
 	return 0;
 }
