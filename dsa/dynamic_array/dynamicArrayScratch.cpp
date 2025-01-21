@@ -5,7 +5,6 @@
 #include<initializer_list>
 #include <csignal>
 
-#define THRESHOLD 0.75
 #define INITIAL_SIZE 0 
 
 template <typename T>
@@ -15,6 +14,7 @@ class Node{
 		Node<T>* next = nullptr;
 };
 
+namespace arr{
 template <typename T>
 class Base{
 	private:
@@ -127,7 +127,12 @@ class Base{
 
 		void _insert(std::size_t index, T value){
 			if (index > size + 1){
-				_push_back(value);
+				std::size_t add = index - size - 1;
+				_resize(add);
+				_insert(index, value);
+			} else if(index == 1){
+				Node<T> *new_node = new Node<T>{value, base};
+				base = new_node;
 			}else if(!base) {
 				base = new Node<T>{value};
 			} else {
@@ -136,19 +141,44 @@ class Base{
 				Node<T> *new_node = new Node<T>{value};
 				new_node->next = temp->next;
 				temp->next = new_node;
-				size++;
 			}
+			size++;
 		}
 
+		void _erase(std::size_t index){
+			if(!base) { std::cout<<"Empty List\n"; return;}
+			else if(index == 1){
+				Node<T> *temp = base;
+				base = temp->next;
+				delete temp;
+			} else {
+				Node<T> *temp = base;
+				for(std::size_t i = 0; i < index - 2; i++, temp = temp->next){}
+				Node<T> *another_temp = temp->next;
+				temp->next = temp->next->next;
+				delete another_temp;
+			}
+			size--;
+		}
+
+		void _resize(std::size_t new_size){
+			Node<T> *end = base;
+			for(; end->next != nullptr; end = end->next);
+			Base another_one(new_size);
+			end->next = another_one.base;
+			size += new_size;
+		}
+
+ };
 };
 
 int main(){
-	Base<int> base(3);
+	arr::Base<int> base(3);
 	base[0] = 1;
 	base[1] = 2;
 	base[2] = 3;
 	base.list();
-	base._insert(5, 99);
+	base._insert(10, 7);
 	base.list();
 	return 0;
 }
