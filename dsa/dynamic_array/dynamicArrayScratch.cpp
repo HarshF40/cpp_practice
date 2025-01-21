@@ -67,9 +67,12 @@ class Base{
 
 		T& operator[](std::size_t index){
 			if(index >= size || base == nullptr){
-				std::cerr<<"Out of bound!\n";
-				std::abort();
+				std::size_t new_size = index - size + 1;
+				_resize(new_size);
+				Node<T> *temp = base;
+				goto down;
 			} else {
+down:
 				Node<T> *temp = base;
 				for(std::size_t i = 0; i < index; i++){
 					temp = temp->next;
@@ -174,11 +177,8 @@ class Base{
 
 int main(){
 	arr::Base<int> base(3);
-	base[0] = 1;
-	base[1] = 2;
-	base[2] = 3;
-	base.list();
-	base._insert(10, 7);
+	base[7] = 1;
+	base[0] = 99;
 	base.list();
 	return 0;
 }
