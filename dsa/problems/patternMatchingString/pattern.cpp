@@ -15,8 +15,8 @@ int main(void){
 			i += pattern.length();
 		} else {
 			i++;
-		}
 	}
+ }
 
 	for(const auto& idx : indexes)
 		std::cout<<idx<<" ";
