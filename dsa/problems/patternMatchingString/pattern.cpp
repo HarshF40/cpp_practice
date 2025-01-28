@@ -10,12 +10,13 @@ int main(void){
 	std::cin>>pattern;
 
 	for(size_t i = 0; i < str.length() - pattern.length() + 1;){
-		std::cout<<i<<std::endl;
 		if(pattern == str.substr(i, pattern.length())){
 			indexes.push_back(i);
 			i += pattern.length();
-		} else { i++; }
+		} else {
+			i++;
 	}
+ }
 
 	for(const auto& idx : indexes)
 		std::cout<<idx<<" ";
