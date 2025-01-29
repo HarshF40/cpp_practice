@@ -1,5 +1,6 @@
-#include<bits/stdc++.h>
-#include <cstring>
+#include<iostream>
+#include<vector>
+#include <string>
 std::vector<int> strstr(std::string str, std::string needle){
 	std::vector<int> idx;
 	if (needle.empty()) {
