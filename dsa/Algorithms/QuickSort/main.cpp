@@ -2,24 +2,29 @@
 //2. Place in its correct place
 //3.Smaller on the left, larger go on the right
 //--Divide and conquer algorithm
+//size_t : unsigned; if size_t used it will cause underflow
 #include<iostream>
 #include<vector>
 
-int partition(std::vector<int>& arr, size_t low, size_t high){
-	size_t i = low;
-	size_t j = high;
-//	while(i < j){
-		while(arr[i] <= arr[low] && i < high) { i++; }
-		while(arr[j] > arr[low] && j > low) { j--; }
+int partition(std::vector<int>& arr, int low, int high){
+	int pivot = arr[low];
+	int i = low;
+	int j = high;
+	while(i < j) {
+		while(pivot >= arr[i] && i < high)
+			i++;
+		while(pivot < arr[j] && j > low)
+			j--;
 		if(i < j) std::swap(arr[i], arr[j]);
-//	}
+	}
 	std::swap(arr[low], arr[j]);
 	return j;
+
 }
 
-void qs(std::vector<int>& arr, size_t low, size_t high){
-	if(low < high) {
-		size_t partition_index = partition(arr, low, high);
+void qs(std::vector<int>& arr, int low, int high){
+	if(low < high){
+		int partition_index = partition(arr, low, high);
 		qs(arr, low, partition_index - 1);
 		qs(arr, partition_index + 1, high);
 	}
@@ -33,7 +38,9 @@ int main(){
 	std::vector<int> arr = {7,2,4,1,9,8,3};
 	quick_sort(arr);
 
+	std::cout<<"Array: ";
 	for(const auto element : arr)
 		std::cout<<element;
+	std::cout<<std::endl;
 	return 0;
 }
