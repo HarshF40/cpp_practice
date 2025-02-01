@@ -2,24 +2,24 @@
 //2. Place in its correct place
 //3.Smaller on the left, larger go on the right
 //--Divide and conquer algorithm
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
 
-int partition(std::vector<int>& arr, int low, int high){
-	int i = low;
-	int j = high;
-	while(i < j){
-		std::cout<<"Hi";
-		while(arr[i] <= arr[low] && i < high) i++;
-		while(arr[j] >= arr[low] && j > low) j++;
+int partition(std::vector<int>& arr, size_t low, size_t high){
+	size_t i = low;
+	size_t j = high;
+//	while(i < j){
+		while(arr[i] <= arr[low] && i < high) { i++; }
+		while(arr[j] > arr[low] && j > low) { j--; }
 		if(i < j) std::swap(arr[i], arr[j]);
-	}
+//	}
 	std::swap(arr[low], arr[j]);
 	return j;
 }
 
-void qs(std::vector<int>& arr, int low, int high){
+void qs(std::vector<int>& arr, size_t low, size_t high){
 	if(low < high) {
-		int partition_index = partition(arr, low, high);
+		size_t partition_index = partition(arr, low, high);
 		qs(arr, low, partition_index - 1);
 		qs(arr, partition_index + 1, high);
 	}
@@ -30,8 +30,9 @@ void quick_sort(std::vector<int>& arr){
 }
 
 int main(){
-	std::vector<int> arr = {4,1,1,7,3,8,2,565,6,3,43,446};
+	std::vector<int> arr = {7,2,4,1,9,8,3};
 	quick_sort(arr);
+
 	for(const auto element : arr)
 		std::cout<<element;
 	return 0;
