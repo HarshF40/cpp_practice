@@ -3,7 +3,7 @@
 #include <type_traits>
 #include<vector>
 
-void quickSort(std::vector<std::string>&);
+std:: quickSort(std::vector<std::string>&);
 void qs(std::string&, int, int);
 int partition(std::string&, int, int);
 
@@ -16,10 +16,11 @@ int main(){
 	return 0;
 }
 
-void quickSort(std::vector<std::string>& words){
+std::vector<std::vector<std::string>> quickSort(std::vector<std::string>& words){
 	for(size_t i = 0; i < words.size(); i++){
 		qs(words[i], 0, words[i].size() - 1);
 	}
+	return sep(words);
 }
 
 void qs(std::string& word, int low, int high){
